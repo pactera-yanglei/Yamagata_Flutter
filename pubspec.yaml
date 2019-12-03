@@ -22,7 +22,9 @@ dependencies:
   fluro: ^1.5.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+
+  flutter_swiper: ^1.1.6
+  #轮播
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +52,8 @@ flutter:
     - images/ic_banking_clicked.png
     - images/ic_atm_clicked.png
     - images/town_selected.png
-
+    - images/balance_default.png
+    -
     - images/guidepage_1.png
     - images/guidepage_2.png
     - images/guidepage_3.png
