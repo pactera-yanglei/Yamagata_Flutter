@@ -1,11 +1,17 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/MainTabWidget.dart';
-import 'UI/tabWidget.dart';
+import 'package:yamagatabank_flutter/routers/application.dart';
+import 'package:yamagatabank_flutter/routers/routers.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  MyApp() {
+    final router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
