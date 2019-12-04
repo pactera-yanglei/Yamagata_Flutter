@@ -39,13 +39,18 @@ class SplashPageState extends State<SplashPage> {
                                 flex: 2,
                                 child: Container(
                                     child: Center(
-                                      child: Text(
-                                          'スキップ',
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colours.app_main
-                                          )
-                                      ),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          NavigatorUtils.push(context, SplashRouter.rulesPage, replace: true);
+                                        },
+                                        child: Text(
+                                            'スキップ',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colours.app_main
+                                            )
+                                        ),
+                                      )
                                     ),
                                 )
                             ),

@@ -45,7 +45,7 @@ class RulesPageState extends State<RulesPage> {
           ),
 
           Expanded(flex: 1,child: Container(color: Colors.white,
-            child: WebWidget('https://www.baidu.com'),
+            child: WebWidget('https://contents-dev.scsk-api.minefocus.jp/images/contents/YAMAGATADEV_AK0001001_A.html'),
           )
           ),
 
