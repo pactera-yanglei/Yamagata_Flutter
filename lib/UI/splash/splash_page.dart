@@ -1,4 +1,8 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/res/colors.dart';
+import 'package:yamagatabank_flutter/routers/fluro_navigator.dart';
+import 'package:yamagatabank_flutter/routers/splash_routes.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -39,7 +43,7 @@ class SplashPageState extends State<SplashPage> {
                                           'スキップ',
                                           style: TextStyle(
                                               fontSize: 18,
-                                              color: Color(0xFF004EA2)
+                                              color: Colours.app_main
                                           )
                                       ),
                                     ),
@@ -75,14 +79,14 @@ class SplashPageState extends State<SplashPage> {
                                         if(_currentPage!=4){
                                           _pageController.animateToPage(_currentPage+1, duration: Duration(milliseconds: 1000), curve: Curves.ease);
                                         }else{
-
+                                          NavigatorUtils.push(context, SplashRouter.rulesPage, replace: true);
                                         }
                                       },
                                       child: Text(
                                           _currentPage==4?'完了':'次へ',
                                           style: TextStyle(
                                               fontSize: 18,
-                                              color: Color(0xFF004EA2)
+                                              color:Colours.app_main
                                           )
                                       ),
                                     ),
@@ -107,6 +111,7 @@ class SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    SpUtil.putString('isFirst', 'rules');
     _pageController = new PageController();
     _pageView = new PageView(
       controller: _pageController,

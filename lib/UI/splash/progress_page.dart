@@ -1,4 +1,6 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/res/colors.dart';
 import 'package:yamagatabank_flutter/widgets/progress_widget1.dart';
 
 class ProgressPage extends StatefulWidget {
@@ -7,11 +9,7 @@ class ProgressPage extends StatefulWidget {
 }
 
 class ProgressPageState extends State<ProgressPage> {
-  int a=0;
-  int b=0;
-  int c=0;
-  int d=0;
-  int e=0;
+
   @override
   Widget build(BuildContext context) {
 
@@ -35,9 +33,9 @@ class ProgressPageState extends State<ProgressPage> {
                     size: 25,
                     maxValue: 100,
                     changeColorValue: 100,
-                    changeProgressColor:  Color(0xFF004EA2),
+                    changeProgressColor: Colours.app_main,
                     backgroundColor: Colors.grey[300],
-                    progressColor: Color(0xFF004EA2),
+                    progressColor: Colours.app_main,
                     animatedDuration: const Duration(milliseconds: 10000),
                     direction: Axis.horizontal,
                     verticalDirection: VerticalDirection.up,
@@ -53,9 +51,10 @@ class ProgressPageState extends State<ProgressPage> {
     );
   }
   @override
-  void initState() {
+  Future initState()  {
     // TODO: implement initState
     super.initState();
+    _initSP();
   }
 
   @override
@@ -74,5 +73,9 @@ class ProgressPageState extends State<ProgressPage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+  }
+
+  _initSP() async{
+    await SpUtil.getInstance();
   }
 }

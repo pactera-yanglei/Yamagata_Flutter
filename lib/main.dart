@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/MainTabWidget.dart';
+import 'package:yamagatabank_flutter/UI/splash/progress_page.dart';
 import 'package:yamagatabank_flutter/routers/application.dart';
 import 'package:yamagatabank_flutter/routers/routers.dart';
 
@@ -38,6 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: 'awabank',
         debugShowCheckedModeBanner:false,
         theme: ThemeData(primaryColor: Colors.white),
-        home:MainTabWidget());
+        home:ProgressPage());
 }
 }

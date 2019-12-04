@@ -1,6 +1,8 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:yamagatabank_flutter/res/colors.dart';
 import 'package:yamagatabank_flutter/routers/fluro_navigator.dart';
 import 'package:yamagatabank_flutter/routers/splash_routes.dart';
 
@@ -18,7 +20,7 @@ class FAProgressBar extends StatefulWidget {
         this.direction = Axis.horizontal,
         this.verticalDirection = VerticalDirection.down,
         this.borderRadius = 8,
-        this.borderColor = const Color(0xFF004EA2),
+        this.borderColor = Colours.app_main,
         this.borderWidth = 0.2,
         this.backgroundColor = const Color(0x00FFFFFF),
         this.progressColor = const Color(0xFFFA7268),
@@ -58,7 +60,14 @@ class _FAProgressBarState extends State<FAProgressBar>
         .animate(_controller)
     ..addStatusListener((state){
       if (state == AnimationStatus.completed) {
-        NavigatorUtils.push(context, SplashRouter.splashPage, replace: true);
+        if(SpUtil.getString('isFirst',defValue:'yes')=='yes'){
+          NavigatorUtils.push(context, SplashRouter.splashPage, replace: true);
+        }else if(SpUtil.getString('isFirst',defValue: 'yes')=='rules'){
+          NavigatorUtils.push(context, SplashRouter.rulesPage, replace: true);
+        } else{
+          NavigatorUtils.push(context, SplashRouter.welcomePage, replace: true);
+        }
+
       }
     });
    
@@ -145,7 +154,7 @@ class AnimatedProgressBar extends AnimatedWidget {
                 widget.displayText,
               style: TextStyle(
                 fontSize: 30,
-                color: Color(0xFF004EA2)
+                color: Colours.app_main
               ),
             ),
           ),
