@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yamagatabank_flutter/UI/page/BookPage.dart';
-import 'package:yamagatabank_flutter/UI/page/FilmPage.dart';
-import 'package:yamagatabank_flutter/UI/page/MyPage.dart';
+import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
+import 'package:yamagatabank_flutter/UI/page/BalancePage.dart';
+import 'package:yamagatabank_flutter/UI/page/CashPage.dart';
 import 'package:yamagatabank_flutter/UI/page/tabViewWidget.dart';
 
 
@@ -24,9 +24,9 @@ class tabWidget extends StatelessWidget {
 
         tabItems: tabs,
         tabViews: [
-          new FilmPage(),
-          new BookPage(),
-          new MyPage()
+          new BalancePage(),
+          new BouseholdPage(),
+          new CashPage()
         ],
         backgroundColor: Theme.of(context).primaryColor,
         indicatorColor: Theme.of(context).indicatorColor,
