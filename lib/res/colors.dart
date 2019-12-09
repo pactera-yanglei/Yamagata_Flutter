@@ -8,6 +8,7 @@ class Colours {
   static const Color cb_uncheck = Color(0xff444444);
   static const Color btn_color = Color(0xff80A6D0);
   static const Color btn_color1 = Color(0xffe5edf6);
+  static const Color yellow = Color(0xffff963c);
 
   static const Color bg_color = Color(0xfff1f1f1);
   static const Color dark_bg_color = Color(0xFF18191A);

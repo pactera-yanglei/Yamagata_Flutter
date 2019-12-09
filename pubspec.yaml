@@ -24,6 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   webview_flutter: ^0.3.15+1
+  dio: 3.0.7
   flustars: ^0.2.6+1
   flutter_swiper: ^1.1.6
   #轮播
@@ -62,3 +63,18 @@ flutter:
     - images/guidepage_4.png
     - images/guidepage_5.png
     - images/ic_error.png
+    - images/new_normal.png
+    - images/new_selected.png
+    - images/gourmet_selected.png
+    - images/gourmet_normal.png
+    - images/event_normal.png
+    - images/event_selected.png
+    - images/trip_selected.png
+    - images/trip_normal.png
+    - images/life_normal.png
+    - images/life_selected.png
+    - images/work_selected.png
+    - images/work_normal.png
+    - images/special_normal.png
+    - images/special_selected.png
+    - images/icon_new.png

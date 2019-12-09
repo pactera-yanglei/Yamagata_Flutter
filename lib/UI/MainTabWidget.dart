@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/Bloc/baseBloc.dart';
+import 'package:yamagatabank_flutter/UI/page/cityinfomation_page.dart';
 import 'package:yamagatabank_flutter/UI/page/tabViewWidget.dart';
 import 'package:yamagatabank_flutter/UI/portal/PortalWidget.dart';
+import 'package:yamagatabank_flutter/UI/refresh_widget.dart';
+import 'package:yamagatabank_flutter/UI/refresh_widget1.dart';
 import 'package:yamagatabank_flutter/UI/tabWidget.dart';
 import 'package:yamagatabank_flutter/tab1.dart';
 import 'package:yamagatabank_flutter/tab2.dart';
@@ -53,7 +56,7 @@ class MainTabWidgetState extends State<MainTabWidget> {
     tabWidget(),
     tab1Widget(),
     SwiperPage(),
-    tab3Widget(),
+    CityInfomationPage(),
   ];
   @override
   void initState(){
