@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/Bloc/baseBloc.dart';
 import 'package:yamagatabank_flutter/UI/page/cityinfomation_page.dart';
 import 'package:yamagatabank_flutter/UI/page/tabViewWidget.dart';
+import 'package:yamagatabank_flutter/UI/portal/NetbankWebviewWidget.dart';
+import 'package:yamagatabank_flutter/UI/portal/PortalWebviewWidget.dart';
 import 'package:yamagatabank_flutter/UI/portal/PortalWidget.dart';
 import 'package:yamagatabank_flutter/UI/refresh_widget.dart';
 import 'package:yamagatabank_flutter/UI/refresh_widget1.dart';
@@ -54,8 +56,8 @@ class MainTabWidgetState extends State<MainTabWidget> {
   List<Widget> tabPages = [
 //    BlocProvider(child: tabWidget(),bloc: Incre,)
     tabWidget(),
-    tab1Widget(),
-    SwiperPage(),
+    NetbankWebviewWidget(),
+    PortalWebviewWidget(),
     CityInfomationPage(),
   ];
   @override
