@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'DialogPage.dart';
 import 'WheelPlantingPage.dart';
 
 class BalancePage extends StatefulWidget {
@@ -86,8 +87,13 @@ class _BalancePagePage extends State<BalancePage> {
                               textAlign: TextAlign.center,
                             ),
                             onPressed: () {
-
-
+//                              Navigator.push(context, MaterialPageRoute(builder: (content){
+//                                return DialogPage();
+//                              }
+//
+//                              ));
+                            DialogPage(context);
+//                              DialogPage();
                             }),
 //                        ),
                       ),

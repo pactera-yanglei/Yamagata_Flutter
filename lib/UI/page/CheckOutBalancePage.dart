@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:yamagatabank_flutter/UI/page/CheckOutBalancePage.dart';
 import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
 import 'package:yamagatabank_flutter/UI/page/BalancePage.dart';
 import 'package:yamagatabank_flutter/UI/page/CashPage.dart';
 import 'package:yamagatabank_flutter/UI/page/tabViewWidget.dart';
 
+import 'CheckOutTabViewWidget.dart';
 
-class tabWidget extends StatelessWidget {
+
+class CheckOutBalanceState extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _CheckOutBalanceStateState createState() => _CheckOutBalanceStateState();
+}
+
+class _CheckOutBalanceStateState extends State<CheckOutBalanceState> {
   @override
   Widget build(BuildContext context) {
     //初始化标签
@@ -17,18 +23,33 @@ class tabWidget extends StatelessWidget {
       _renderTab(new Text("金箱",style:TextStyle(color: Colors.blue)))
     ];
     //一个控件，可以监听返回键
-    return new WillPopScope(
-      child: new TabBarWidget(
-        title: new Text("家計管理",textAlign: TextAlign.center,),
-        type: TabBarWidget.TOP_TAB,
-        tabItems: tabs,
-        tabViews: [
-          new BalancePage(),
-          new BouseholdPage(),
-          new CashPage()
-        ],
-        backgroundColor: Theme.of(context).primaryColor,
-        indicatorColor: Theme.of(context).indicatorColor,
+    return Container(
+      child: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            appBar: AppBar(
+              bottom: TabBar(
+                unselectedLabelColor: Colors.blue,
+                indicatorColor: Colors.blue,
+//                indicatorSize: TabBarIndicatorSize.label,
+//                indicatorWeight:
+//
+//                10.0,
+                tabs: <Widget>[
+                  Tab(text: "残高",),
+                  Tab(text:"家計簙",),
+                  Tab(text: "金箱",),
+                ],
+              ),
+            ),
+            body: TabBarView(
+              children: <Widget>[
+                new BalancePage(),
+                new BouseholdPage(),
+                new CashPage()
+              ],
+            ),
+          )
       ),
     );
   }
