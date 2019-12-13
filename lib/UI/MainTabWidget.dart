@@ -12,6 +12,8 @@ import 'package:yamagatabank_flutter/tab1.dart';
 import 'package:yamagatabank_flutter/tab2.dart';
 import 'package:yamagatabank_flutter/tab3.dart';
 
+import 'CheckOutTabWidget.dart';
+
 class ETMainTabModel {
   String title;
   String unSelectedImage;
@@ -55,7 +57,7 @@ class MainTabWidgetState extends State<MainTabWidget> {
   ];
   List<Widget> tabPages = [
 //    BlocProvider(child: tabWidget(),bloc: Incre,)
-    tabWidget(),
+    CheckOutTabWidget(),
     NetbankWebviewWidget(),
     PortalWebviewWidget(),
     CityInfomationPage(),

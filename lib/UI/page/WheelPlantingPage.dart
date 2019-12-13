@@ -80,6 +80,9 @@
 //}
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/UI/portal/LoginRuleWebViewPage.dart';
+import 'package:yamagatabank_flutter/UI/portal/LoginRuleWidget.dart';
+import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
 
 import '../MainTabWidget.dart';
 import 'WheelPlanting1Page.dart';
@@ -118,9 +121,10 @@ class SplashPageState extends State<SplashPage> {
                         padding: EdgeInsets.only(right: 10.0,top: 10.0),
                         child: GestureDetector(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (content){
-                              return MainTabWidget();
-                            }));
+//                            Navigator.push(context, MaterialPageRoute(builder: (content){
+////                              return MainTabWidget();
+////                            }));
+                          Navigator.of(context).pop();
                           },
                           child: Text(
                             '閉じる',style: TextStyle(fontSize: 18.0,color: Colors.black),
@@ -151,6 +155,9 @@ class SplashPageState extends State<SplashPage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder:(context){
+                                    return LoginRule();
+                                  }));
                                 }),
                           )
                         ],),

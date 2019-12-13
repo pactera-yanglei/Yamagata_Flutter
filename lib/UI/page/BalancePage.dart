@@ -90,7 +90,6 @@ class _BalancePagePage extends State<BalancePage> {
 //                              Navigator.push(context, MaterialPageRoute(builder: (content){
 //                                return DialogPage();
 //                              }
-//
 //                              ));
                             DialogPage(context);
 //                              DialogPage();

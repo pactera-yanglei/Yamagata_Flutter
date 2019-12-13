@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'CashPageWidget.dart';
+import 'DialogPage.dart';
+
 class CashPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -52,7 +55,9 @@ class _CashPage extends State<CashPage> {
                         color: Colors.blue,
                         child: Text('はじめての方はこちら',style: TextStyle(color: Colors.white),textAlign: TextAlign.center,),
                         onPressed: () {
-                          print("2");
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return CashWidget();
+                          }));
                         }),
                   ),
                 ),
@@ -71,7 +76,7 @@ class _CashPage extends State<CashPage> {
                             color: Colors.black12,
                             child: Text('Moneytreeアカウント設定',style: TextStyle(color: Colors.blueAccent),textAlign: TextAlign.center,),
                             onPressed: () {
-                              print("2");
+                              DialogPage(context);
                             }),
 //                        ),
                       ),

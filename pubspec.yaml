@@ -28,7 +28,8 @@ dependencies:
   flustars: ^0.2.6+1
   flutter_swiper: ^1.1.6
   #轮播
-
+  shared_preferences: ^0.5.4+3
+  #本地缓存
 dev_dependencies:
   flutter_test:
     sdk: flutter

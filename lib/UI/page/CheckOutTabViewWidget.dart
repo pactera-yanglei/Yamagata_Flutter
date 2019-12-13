@@ -75,10 +75,7 @@ class _TabBarState extends State<CheckOutTabBarWidget>
       return new Scaffold(
         drawer: _drawer,
         appBar: new AppBar(
-//          backgroundColor: Theme.of(context).primaryColor,
-//          centerTitle: true,
-//          title: _title,
-          bottom: new TabBar(
+          title: TabBar(
             tabs: widget.tabItems,
             controller: _tabController,
             indicatorColor: _indicatorColor,

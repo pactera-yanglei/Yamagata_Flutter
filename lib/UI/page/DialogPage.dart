@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/UI/portal/LoginRuleWidget.dart';
 
 void DialogPage(BuildContext context) {
   // TODO: implement build
@@ -48,76 +49,89 @@ void DialogPage(BuildContext context) {
                   style: TextStyle(fontSize: 13.0),
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(
+                  height: 10.0,
+                  child: Container(),
+                ),
                 Row(
                   children: <Widget>[
-                   OutlineButton(
+                    Container(
+                      alignment: Alignment.center,
+//                      color:Colors.red,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1.0),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
+                      height: 40.0,
+                      width: MediaQuery.of(context).size.width * 0.31,
+                      child: MaterialButton(
+                          elevation: 0,
                           color: Colors.black12,
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    'いいえ',
-                                    style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontSize: 16.0),
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
+                          child: Column(children: <Widget>[
+                            Container(
+                                child: Text(
+                              'いいえ',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                            Container(
+                              child: Text(
+                                '(ネットバンク申込みへ)',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 7.0),
                               ),
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    '(ネットバンク申込みへ)',
-                                    style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontSize: 10.0),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                            ),
+                          ]),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)),
                           onPressed: () {
                             print("2");
                           }),
-                 OutlineButton(
-                          color: Colors.black12,
-
+                    ),
+                    Container(
+                      width: 8.0,
+                      child: Text(''),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue, width: 1.0),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
+                      height: 40.0,
+                      width: MediaQuery.of(context).size.width * 0.31,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color: Colors.white12,
                           child: Column(
                             children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    'はい',
-                                    style: TextStyle(
-                                      color: Colors.blueAccent,
-                                      fontSize: 16.0,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    '(次にすすむ)',
-                                    style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontSize: 10.0),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                              Container(
+                                  child: Text(
+                                'はい',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                              Container(
+                                child: Text(
+                                  '(次にすすむ)',
+                                  style: TextStyle(
+                                      color: Colors.blue, fontSize: 7.0),
+                                ),
                               ),
                             ],
                           ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)),
                           onPressed: () {
-                            print("2");
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return  LoginRule();
+                            }));
                           }),
+                    )
                   ],
                 ),
               ],

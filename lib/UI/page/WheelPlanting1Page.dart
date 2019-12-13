@@ -37,9 +37,10 @@ class SplashPageState1 extends State<SplashPage1> {
                           padding: EdgeInsets.only(right: 10.0,top: 10.0),
                           child: GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (content){
-                                return SplashPage();
-                              }));
+//                              Navigator.push(context, MaterialPageRoute(builder: (content){
+//                                return SplashPage();
+//                              }));
+                            Navigator.of(context).pop();
                             },
                             child: Text(
                               '閉じる',style: TextStyle(fontSize: 18.0,color: Colors.black),

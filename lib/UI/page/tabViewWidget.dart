@@ -83,7 +83,7 @@ class _TabBarState extends State<TabBarWidget> with SingleTickerProviderStateMix
           leading: Icon(Icons.notifications_none),
           backgroundColor: Theme.of(context).primaryColor,
           centerTitle: true,
-
+          actions: <Widget>[Icon(Icons.help_outline), Icon(Icons.settings)],
           title: _title,
           bottom: new TabBar(
 

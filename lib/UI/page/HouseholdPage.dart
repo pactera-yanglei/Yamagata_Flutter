@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'DialogPage.dart';
+import 'HousePage.dart';
+
 class BouseholdPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -53,7 +56,9 @@ class _BouseholdPage extends State<BouseholdPage> {
                         color: Colors.blue,
                         child: Text('はじめての方はこちら',style: TextStyle(color: Colors.white),textAlign: TextAlign.center,),
                         onPressed: () {
-                          print("2");
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return  HousePage();
+                          }));
                         }),
                   ),
                 ),
@@ -72,7 +77,7 @@ class _BouseholdPage extends State<BouseholdPage> {
                             color: Colors.black12,
                             child: Text('Moneytreeアカウント設定',style: TextStyle(color: Colors.blueAccent),textAlign: TextAlign.center,),
                             onPressed: () {
-                              print("2");
+                              DialogPage(context);
                             }),
 //                        ),
                       ),

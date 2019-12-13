@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/UI/page/CheckOutBalancePage.dart';
 import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
 import 'package:yamagatabank_flutter/UI/page/BalancePage.dart';
 import 'package:yamagatabank_flutter/UI/page/CashPage.dart';
 import 'package:yamagatabank_flutter/UI/page/tabViewWidget.dart';
 
 
-class tabWidget extends StatelessWidget {
+class CheckOutTabWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
