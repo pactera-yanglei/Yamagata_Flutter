@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/UI/passcode/SetPasscodeFirstWidget.dart';
 
 import 'LoginRuleWebViewPage.dart';
 import 'LoginWebView.dart';
@@ -220,7 +221,7 @@ class _LoginRuleState extends State<LoginRule> {
   void _statePressed(){
     Navigator.push(context,
         MaterialPageRoute(builder: (content) {
-          return LoginWeb();
+          return SetPasscodeFirstWidget();
         }));
   }
 }
