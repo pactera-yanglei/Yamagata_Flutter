@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'EditPage.dart';
+import 'package:sqflite/sqflite.dart';
+import 'EditPage1.dart';
+import 'package:path/path.dart';
 
 class BookMakesState extends StatefulWidget {
   @override
@@ -8,96 +9,53 @@ class BookMakesState extends StatefulWidget {
 }
 
 class _BookMakesStateState extends State<BookMakesState> {
-  List<String> titleItems = <String>[
-    'keyboard',
-    'print',
-    'router',
-    'pages',
-    'zoom_out_map',
-    'zoom_out',
-    'youtube_searched_for',
-    'wifi_tethering',
-    'wifi_lock',
-    'widgets',
-    'weekend',
-    'web',
-    '图accessible',
-    'ac_unit',
-  ];
+  List<UserInfo> YY1;
+  String _dbName = 'user.db'; //数据库名称
 
-  List<Icon> iconItems = <Icon>[
-    new Icon(Icons.keyboard),
-    new Icon(Icons.print),
-    new Icon(Icons.router),
-    new Icon(Icons.pages),
-    new Icon(Icons.zoom_out_map),
-    new Icon(Icons.zoom_out),
-    new Icon(Icons.youtube_searched_for),
-    new Icon(Icons.wifi_tethering),
-    new Icon(Icons.wifi_lock),
-    new Icon(Icons.widgets),
-    new Icon(Icons.weekend),
-    new Icon(Icons.web),
-    new Icon(Icons.accessible),
-    new Icon(Icons.ac_unit),
-  ];
+//  Widget buildListData(BuildContext context, List<UserInfo> YY1, item) {
+//    return new ListTile(
+//      leading: Icon(Icons.attach_money),
+//      title: new Text(
+//        YY1[item].Name,
+//        style: TextStyle(fontSize: 18),
+//      ),
+//      subtitle: new Text(
+//        YY1[item].Id.toString(),
+//      ),
+//      trailing: new Icon(Icons.keyboard_arrow_right),
+//      // 创建点击事件
+//      onTap: () {
+//        showDialog(
+//          context: context,
+//          builder: (BuildContext context) {
+//            return new AlertDialog(
+//              title: new Text(
+//                'ListViewAlert',
+//                style: new TextStyle(
+//                  color: Colors.black54,
+//                  fontSize: 18.0,
+//                ),
+//              ),
+//              content: new Text('您选择的item内容为:$YY1[item].Name'),
+//            );
+//          },
+//        );
+//      },
+//    );
+//  }
 
-  List<String> subTitleItems = <String>[
-    'subTitle: keyboard',
-    'subTitle: print',
-    'subTitle: router',
-    'subTitle: pages',
-    'subTitle: zoom_out_map',
-    'subTitle: zoom_out',
-    'subTitle: youtube_searched_for',
-    'subTitle: wifi_tethering',
-    'subTitle: wifi_lock',
-    'subTitle: widgets',
-    'subTitle: weekend',
-    'subTitle: web',
-    'subTitle: accessible',
-    'subTitle: ac_unit',
-  ];
-  Widget buildListData(BuildContext context, String titleItem, Icon iconItem,
-      String subTitleItem) {
-    return new ListTile(
-      leading: iconItem,
-      title: new Text(
-        titleItem,
-        style: TextStyle(fontSize: 18),
-      ),
-      subtitle: new Text(
-        subTitleItem,
-      ),
-      trailing: new Icon(Icons.keyboard_arrow_right),
-      // 创建点击事件
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return new AlertDialog(
-              title: new Text(
-                'ListViewAlert',
-                style: new TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18.0,
-                ),
-              ),
-              content: new Text('您选择的item内容为:$titleItem'),
-            );
-          },
-        );
-      },
-    );
+  @override
+  void initState() {
+    // TODO: implement initState
+    String sql = "SELECT * FROM student_table WHERE isSelect=true";
+    YY1 = new List();
+    _query(_dbName, sql);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _list = new List();
-    for (int i = 0; i < titleItems.length; i++) {
-      _list.add(buildListData(
-          context, titleItems[i], iconItems[i], subTitleItems[i]));
-    }
+
     // TODO: implement build
     return Scaffold(
       body: Container(
@@ -107,7 +65,6 @@ class _BookMakesStateState extends State<BookMakesState> {
         child: Column(
           children: <Widget>[
             Container(
-
               height: 20.0,
               width: MediaQuery.of(context).size.width * 0.9,
               child: Row(
@@ -117,22 +74,24 @@ class _BookMakesStateState extends State<BookMakesState> {
                     flex: 12,
                     child: Text(
                       'お気に入り情報',
-                      style: TextStyle(fontSize: 15.0, color: Colors.black),textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15.0, color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-
                   Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder:(context){
-                            return EditWidget();
-                          }));
-                        },
-                        child: Text(
-                          "編集",
-                          style: TextStyle(fontSize: 12.0, color: Colors.blue),textAlign: TextAlign.right,
-                        ),
-                      ))
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return EditWidget1();
+                      }));
+                    },
+                    child: Text(
+                      "編集",
+                      style: TextStyle(fontSize: 12.0, color: Colors.blue),
+                      textAlign: TextAlign.right,
+                    ),
+                  ))
                 ],
               ),
             ),
@@ -142,15 +101,46 @@ class _BookMakesStateState extends State<BookMakesState> {
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                 itemBuilder: (context, item) {
-                  return buildListData(context, titleItems[item],
-                      iconItems[item], subTitleItems[item]);
+//                  return buildListData(context, YY1, item);
+                return Text ("text$item");
                 },
-                itemCount: iconItems.length,
+//                itemCount: YY1.length,
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  ///查全部
+  _query(String dbName, String sql) async {
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, dbName);
+
+    Database db = await openDatabase(path);
+    List<Map> list = await db.rawQuery(sql);
+//    setState(() {
+//
+//    });
+    for (int i = 0; i < list.length; i++) {
+      UserInfo info = new UserInfo();
+      info.Id = list[i]['id'];
+      info.Name = list[i]['name'];
+      if (list[i]['bool'] == 'true') {
+        info.isSelect = true;
+      } else {
+        info.isSelect = false;
+      }
+      YY1.add(info);
+    }
+    for(int i=0;i<YY1.length;i++){
+      print(YY1[i]);
+    }
+    print('asdaf'+"dsd");
+    setState(() {});
+
+    await db.close();
+
   }
 }

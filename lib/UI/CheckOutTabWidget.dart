@@ -23,7 +23,7 @@ class CheckOutTabWidget extends StatelessWidget {
         type: TabBarWidget.TOP_TAB,
         tabItems: tabs,
         tabViews: [
-          new BalancePage(),
+          new CheckOutBalanceState(),
           new BouseholdPage(),
           new CashPage()
         ],
