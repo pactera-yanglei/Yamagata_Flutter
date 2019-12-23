@@ -81,3 +81,6 @@ flutter:
     - images/special_normal.png
     - images/special_selected.png
     - images/icon_new.png
+    - assets/icon/general_ps.png
+    - assets/icon/passbook_income.png
+    - assets/icon/passbook_outlay.png

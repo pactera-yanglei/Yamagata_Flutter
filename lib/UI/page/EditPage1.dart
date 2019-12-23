@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+import 'BookMarksPage.dart';
+
 //UserInfo
 class UserInfo {
   String Name;
@@ -94,6 +96,9 @@ class _EditWidgetState extends State<EditWidget1> {
                   }
                   SpUtil.putBool('Bl', false);
                   Navigator.of(context).pop();
+//                  Navigator.push(context, MaterialPageRoute(builder:(context){
+//                    return BookMakesState();
+//                  }));
                 },
                 child: Text(
                   '完了',
@@ -197,9 +202,9 @@ class _EditWidgetState extends State<EditWidget1> {
       int count = await txn.rawInsert(sql);
     });
 //    await db.close();
-    setState(() {
-//      _data = "插入数据成功！";
-    });
+//    setState(() {
+////      _data = "插入数据成功！";
+//    });
   }
 
   ///删

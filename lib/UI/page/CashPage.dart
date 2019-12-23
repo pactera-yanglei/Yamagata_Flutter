@@ -30,7 +30,7 @@ class _CashPage extends State<CashPage> {
                   width:  MediaQuery.of(context).size.width-20.0,
                   padding: EdgeInsets.all(2.0),
                   color: Colors.white,
-                  child: Image.asset('images/storage_default.png'),
+                  child: Image.asset('images/2.0x/storage_default.png'),
                 ),
                 Container(
                   height:(MediaQuery.of(context).size.height-200.0)/4,
@@ -42,7 +42,7 @@ class _CashPage extends State<CashPage> {
                   height:(MediaQuery.of(context).size.height-200.0)/12,
                   width:  MediaQuery.of(context).size.width-20.0,
                   color: Colors.white,
-                  child: Image.asset('images/logo_momeytree.png'),
+                  child: Image.asset('images/2.0x/logo_momeytree.png'),
                 ),
                 Container(
                   width:  MediaQuery.of(context).size.width-20.0,
@@ -82,7 +82,7 @@ class _CashPage extends State<CashPage> {
                       ),
                       Container(
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.95-65.0,top: 6.0),
-                        child: Image.asset('images/moneytree_btn_blue.png'),
+                        child: Image.asset('images/2.0x/moneytree_btn_blue.png'),
                       )
                     ],
                   ),
