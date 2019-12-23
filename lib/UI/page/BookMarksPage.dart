@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:yamagatabank_flutter/UI/DetailsPage/SeisonCardPage.dart';
+import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
 import 'EditPage1.dart';
 import 'package:path/path.dart';
 
@@ -12,51 +15,25 @@ class _BookMakesStateState extends State<BookMakesState> {
   List<UserInfo> YY1;
   String _dbName = 'user.db'; //数据库名称
 
-//  Widget buildListData(BuildContext context, List<UserInfo> YY1, item) {
-//    return new ListTile(
-//      leading: Icon(Icons.attach_money),
-//      title: new Text(
-//        YY1[item].Name,
-//        style: TextStyle(fontSize: 18),
-//      ),
-//      subtitle: new Text(
-//        YY1[item].Id.toString(),
-//      ),
-//      trailing: new Icon(Icons.keyboard_arrow_right),
-//      // 创建点击事件
-//      onTap: () {
-//        showDialog(
-//          context: context,
-//          builder: (BuildContext context) {
-//            return new AlertDialog(
-//              title: new Text(
-//                'ListViewAlert',
-//                style: new TextStyle(
-//                  color: Colors.black54,
-//                  fontSize: 18.0,
-//                ),
-//              ),
-//              content: new Text('您选择的item内容为:$YY1[item].Name'),
-//            );
-//          },
-//        );
-//      },
-//    );
-//  }
-
   @override
   void initState() {
     // TODO: implement initState
-    String sql = "SELECT * FROM student_table WHERE isSelect=true";
+    String sql = "SELECT * FROM student_table WHERE bool='true'";
     YY1 = new List();
     _query(_dbName, sql);
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     // TODO: implement build
+
     return Scaffold(
       body: Container(
 //        color: Colors.black12,
@@ -97,16 +74,81 @@ class _BookMakesStateState extends State<BookMakesState> {
             ),
             Divider(height: 1.0, indent: 0.0, color: Colors.black12),
             Container(
-              height: MediaQuery.of(context).size.height * 0.55,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                itemBuilder: (context, item) {
-//                  return buildListData(context, YY1, item);
-                return Text ("text$item");
-                },
-//                itemCount: YY1.length,
+              padding: EdgeInsets.only(top: 10.0),
+              height: MediaQuery.of(context).size.height * 0.47,
+              width: MediaQuery.of(context).size.width * 0.95,
+              child: Card(
+                elevation: 0,
+                child: ListView(
+                  children: YY1
+                      .map(
+                        (UserInfo) => ListTile(
+                          leading: Icon(Icons.attach_money),
+                          title: Text(UserInfo.Name),
+                          subtitle: Text(UserInfo.Name),
+                            trailing:Icon(Icons.navigate_next),
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return SeisionCardState();
+                            }));
+                            Divider(
+                                height: 2.0,
+                                indent: 0.0,
+                                color: Colors.black12);
+                          },
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
             ),
+            Container(
+              padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
+//              width: MediaQuery.of(context).size.width ,
+//              height: MediaQuery.of(context).size.height*0.04,
+              child: Image.asset('images/logo_momeytree.png'),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width - 20.0,
+//                  height:(MediaQuery.of(context).size.height-200.0)/12,
+//              color: Colors.white,
+              padding: EdgeInsets.only(
+                  left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width - 20.0,
+                    height:
+                    (MediaQuery.of(context).size.height - 200.0) / 12,
+                    child: MaterialButton(
+                        elevation: 0,
+                        color: Colors.red,
+                        child: Text(
+                          '認証エラーまたは追加認証が必要',
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (content){
+                                return LoginWeb();
+                              }
+                              ));
+//                          DialogPage(context);
+//                              DialogPage();
+                        }),
+//                        ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                        left:
+                        MediaQuery.of(context).size.width * 0.95 - 65.0,
+                        top: 6.0),
+                    child: Image.asset('images/2.0x/moneytree_btn_blue.png',color: Colors.white,),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -117,30 +159,24 @@ class _BookMakesStateState extends State<BookMakesState> {
   _query(String dbName, String sql) async {
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, dbName);
-
     Database db = await openDatabase(path);
     List<Map> list = await db.rawQuery(sql);
-//    setState(() {
-//
-//    });
     for (int i = 0; i < list.length; i++) {
       UserInfo info = new UserInfo();
       info.Id = list[i]['id'];
       info.Name = list[i]['name'];
-      if (list[i]['bool'] == 'true') {
+      if (list[i]['isselect'] == 'true') {
         info.isSelect = true;
       } else {
         info.isSelect = false;
       }
+//      info.isSelect=list[i]['isselect'];
       YY1.add(info);
     }
-    for(int i=0;i<YY1.length;i++){
+    for (int i = 0; i < YY1.length; i++) {
       print(YY1[i]);
     }
-    print('asdaf'+"dsd");
     setState(() {});
-
     await db.close();
-
   }
 }

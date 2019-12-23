@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yamagatabank_flutter/UI/AssetsPage/AssetsMainPage.dart';
 import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
-import 'package:yamagatabank_flutter/UI/page/BalancePage.dart';
 import 'package:yamagatabank_flutter/UI/page/CashPage.dart';
-import 'package:yamagatabank_flutter/UI/page/tabViewWidget.dart';
 
 import 'BookMarksPage.dart';
-import 'CheckOutTabViewWidget.dart';
+
 
 
 class CheckOutBalanceState extends StatefulWidget {
@@ -37,7 +36,7 @@ class _CheckOutBalanceStateState extends State<CheckOutBalanceState> {
                   child:new BookMakesState(),
                 ),
                 Container(
-                  child:new BouseholdPage(),
+                  child:new AssetsMainPage(),
                 ),
                 Container(
                   child:new CashPage(),
