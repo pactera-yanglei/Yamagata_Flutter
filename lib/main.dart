@@ -4,6 +4,7 @@ import 'package:yamagatabank_flutter/UI/MainTabWidget.dart';
 import 'package:yamagatabank_flutter/UI/splash/progress_page.dart';
 import 'package:yamagatabank_flutter/routers/application.dart';
 import 'package:yamagatabank_flutter/routers/routers.dart';
+import 'package:yamagatabank_flutter/webtest.dart';
 
 void main() => runApp(MyApp());
 
