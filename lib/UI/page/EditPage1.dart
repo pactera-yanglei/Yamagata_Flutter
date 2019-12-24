@@ -27,7 +27,7 @@ class EditWidget1 extends StatefulWidget {
 class _EditWidgetState extends State<EditWidget1> {
   List<UserInfo> userMapList = new List(); //自定义数据
   List<UserInfo> list1 = []; //接数据定义的list
-  String _dbName = 'user.db'; //数据库名称
+  String _dbName = 'user.db1'; //数据库名称
   int _dbVersion = 1; //数据库版本
   String _createTableSQL =
       'CREATE TABLE student_table (id INTEGER PRIMARY KEY, name TEXT,age INTEGER,bool ISSELECT)'; //创建表;
@@ -37,8 +37,7 @@ class _EditWidgetState extends State<EditWidget1> {
   void initState() {
     // TODO: implement initState
     addUser();
-    //创建数据库，表
-    _createDb(_dbName, _dbVersion, _createTableSQL);
+
     String sql = "SELECT * FROM student_table";
     YY = new List();
     _query(_dbName, sql);

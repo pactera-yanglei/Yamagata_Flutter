@@ -2,6 +2,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:fluro/src/router.dart';
 import 'package:yamagatabank_flutter/UI/MainTabWidget.dart';
+import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
 import 'package:yamagatabank_flutter/UI/splash/rules_page.dart';
 import 'package:yamagatabank_flutter/UI/splash/splash_page.dart';
 import 'package:yamagatabank_flutter/UI/splash/welcome_page.dart';
@@ -22,7 +23,7 @@ class SplashRouter implements IRouterProvider{
     router.define(rulesPage, handler: Handler(handlerFunc: (_, params) => RulesPage()));
     router.define(welcomePage, handler: Handler(handlerFunc: (_, params) => WelcomePage()));
     router.define(mainPage, handler: Handler(handlerFunc: (_, params) => MainTabWidget()));
-    router.define(loginWebPage, handler: Handler(handlerFunc: (_, params) => WebTest()));
+    router.define(loginWebPage, handler: Handler(handlerFunc: (_, params) => LoginWeb()));
   }
 
 }

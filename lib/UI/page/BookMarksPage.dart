@@ -12,7 +12,7 @@ class BookMakesState extends StatefulWidget {
 
 class _BookMakesStateState extends State<BookMakesState> {
   List<UserInfo> YY1;
-  String _dbName = 'user.db'; //数据库名称
+  String _dbName = 'user.db1'; //数据库名称
 
   @override
   void initState() {

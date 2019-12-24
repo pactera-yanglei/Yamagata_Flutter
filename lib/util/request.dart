@@ -3,6 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:dart_json_mapper/json_mapper.dart';
 import 'dart:async';
 
+import 'package:flustars/flustars.dart';
+import 'package:yamagatabank_flutter/util/app_info.dart';
+
 /// 请求方法
 enum HttpMethod {
   get,
@@ -158,6 +161,24 @@ class RequestManager {
       final notes = RequestNotes(request: req);
       requestNotesList.add(notes);
 
+
+//      String code = SpUtil.getString('code');
+//      Map<String, dynamic> m = new Map();
+////    {'requestHeader': getRequestHeader(SpUtil.getString('uuid')), 'code': code,'grant_type':'authorization_code','redirect_uri':'"minefocus-yamagatabank://mt/login/callback"','client_id':'"c22239ab913baefb586a707b7cf1713b0f639bbcb586b9c83a4d1222cd29c8b3"'}
+//
+//      m['requestHeader'] = getRequestHeader(SpUtil.getString('uuid'));
+//      m['code'] = '"$code"';
+//      m['grant_type'] = '"authorization_code"';
+//      m['redirect_uri']= '"minefocus-yamagatabank://mt/login/callback"';
+//      m['client_id'] = '"c22239ab913baefb586a707b7cf1713b0f639bbcb586b9c83a4d1222cd29c8b3"';
+//      String s =  getRequestHeader(SpUtil.getString('uuid'));
+//      String pa = '{''"requestHeader":"$s"'
+//                    '"code":"$code"'+
+//                    '"grant_type":"authorization_code"'+
+//                    '"redirect_uri":"minefocus-yamagatabank://mt/login/callback"'+
+//                    '"client_id":"c22239ab913baefb586a707b7cf1713b0f639bbcb586b9c83a4d1222cd29c8b3"}';
+
+
       /// 请求start
       Response response = await Dio().request(url, data: parameter, options: option);
       requestNotesList.remove(notes);
@@ -180,6 +201,27 @@ class RequestManager {
       /// 普通error
       return Result(false, error: RequestError.normal(error));
     }
+  }
+  String getRequestHeader(String uuid) {
+//    RequestHeaderBean headerBean = new RequestHeaderBean();
+//    headerBean.appOS = AppInfo.getInstance().systemVersion;
+//    headerBean.modelName = AppInfo.getInstance().machine;
+//    headerBean.deviceId = ' ';
+//    headerBean.appVer = AppInfo.getInstance().version;
+//    headerBean.uuid = uuid;
+    Map<String, dynamic> m = new Map();
+//    {'requestHeader': getRequestHeader(SpUtil.getString('uuid')), 'code': code,'grant_type':'authorization_code','redirect_uri':'"minefocus-yamagatabank://mt/login/callback"','client_id':'"c22239ab913baefb586a707b7cf1713b0f639bbcb586b9c83a4d1222cd29c8b3"'}
+    String a = AppInfo.getInstance().systemVersion;
+    String b = AppInfo.getInstance().machine;
+    String d = AppInfo.getInstance().version;
+    String c = ' ';
+    m['appOS'] = 'Android $a';
+    m['modelName'] =  AppInfo.getInstance().machine;
+    m['deviceId'] = ' ';
+    m['appVer']= AppInfo.getInstance().version;
+    m['uuid'] = uuid;
+    return '{"appOS":"Android $a", "modelName":"$b", "deviceId":" " ,"appVer":"3.3.3", "uuid":"$uuid"}';
+//    return m.toString();
   }
 }
 

@@ -81,6 +81,9 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
+import 'package:yamagatabank_flutter/routers/fluro_navigator.dart';
+import 'package:yamagatabank_flutter/routers/splash_routes.dart';
+import 'package:yamagatabank_flutter/webtest.dart';
 
 import '../MainTabWidget.dart';
 import 'WheelPlanting1Page.dart';
@@ -156,9 +159,7 @@ class CashWidgetState extends State<CashWidget> {
                                       textAlign: TextAlign.center,
                                     ),
                                     onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(builder:(context){
-                                        return LoginWeb();
-                                      }));
+                                      NavigatorUtils.push(context, SplashRouter.loginWebPage, replace: false);
                                     }),
                               )
                             ],

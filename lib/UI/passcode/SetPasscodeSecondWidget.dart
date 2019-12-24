@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/passcode/passcode_input.dart';
 import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
+import 'package:yamagatabank_flutter/routers/fluro_navigator.dart';
+import 'package:yamagatabank_flutter/routers/splash_routes.dart';
+import 'package:yamagatabank_flutter/webtest.dart';
 import 'key_down_event.dart';
 import 'passcode_keyboard.dart';
 
@@ -54,10 +57,7 @@ class SetPasscodeSecondState extends State<SetPasscodeSecondWidget> {
 //                                .setToSp(key: 'passCode', value: newText);
 //                            Navigator.of(context).pop();
                             Navigator.of(context).pop();
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (content) {
-                                  return LoginWeb();
-                                }));
+                            NavigatorUtils.push(context, SplashRouter.loginWebPage, replace: false);
                           },
                         ),
                       ],

@@ -9,6 +9,10 @@ class Colours {
   static const Color btn_color = Color(0xff80A6D0);
   static const Color btn_color1 = Color(0xffe5edf6);
   static const Color yellow = Color(0xffff963c);
+  static const Color color_b22222 = Color(0xffb22222);
+  static const Color color_fce5e7 = Color(0xfffce5e7);
+  static const Color color_e5e5e5 = Color(0xffe5e5e5);
+  static const Color color_fafafa = Color(0xfffafafa);
 
   static const Color bg_color = Color(0xfff1f1f1);
   static const Color dark_bg_color = Color(0xFF18191A);
@@ -45,5 +49,6 @@ class Colours {
 
   static const Color bg_gray_ = Color(0xFFFAFAFA);
   static const Color dark_bg_gray_ = Color(0xFF242526);
+  static const Color color_666666 = Color(0xFF666666);
 }
 

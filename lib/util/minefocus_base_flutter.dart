@@ -1,16 +1,9 @@
 library minefocus_base_flutter;
 
-import 'package:minefocus_base_flutter/src/app_info.dart';
-import 'package:minefocus_base_flutter/src/request.dart';
-import 'package:minefocus_base_flutter/src/secure_storage_util.dart';
+import 'package:yamagatabank_flutter/util/app_info.dart';
+import 'package:yamagatabank_flutter/util/request.dart';
 
-export 'src/app_info.dart';
-export 'src/apis.dart';
-export 'src/models.dart';
-export 'src/request.dart';
-export 'src/user_content.dart';
-export 'src/minefocus_api.dart';
-export 'src/secure_storage_util.dart';
+
 
 class MinefocusBase {
   /// API管理单例
@@ -18,9 +11,6 @@ class MinefocusBase {
 
   /// 设备和包名信息单例
   AppInfo appInfo;
-
-  /// 数据存储单例
-  SecureStorageUtil storage;
 
   /// message管理单例
   final config = MinefocusConfig.getInstance();
@@ -40,7 +30,6 @@ class MinefocusBase {
     _minefocusBaseUrl = baseUrl;
     appInfo = await AppInfo.getInstance().init();
     requestManager = RequestManager.getInstance();
-    storage = await SecureStorageUtil.getInstance().init();
     return _instance;
   }
 }

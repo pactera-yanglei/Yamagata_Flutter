@@ -1,11 +1,16 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
+import 'package:flustars/flustars.dart';
+import 'package:sqflite/utils/utils.dart';
+import 'package:yamagatabank_flutter/util/keys.dart';
+import 'package:yamagatabank_flutter/util/minefocus_base_flutter.dart';
 import 'app_info.dart';
 import 'dart:async';
 import 'request.dart';
-import 'keys.dart';
-import '../minefocus_base_flutter.dart';
+
 
 /// Minefocus JWT 请求基类
 /// 泛型[T]为 Result.data的类型
@@ -27,20 +32,23 @@ class MinefocusAPI<T> extends BaseRequest {
 
   @override
   Future<Map<String, dynamic>> getHeaders() async {
+    int num = randomNum(10000);
+//    num = 3431;
     /// 配置JWT 自定义headers
     final appInfo = MinefocusBase.getInstance().appInfo;
+    String uuid = SpUtil.getString('uuid');
     Map<String, dynamic> header = {
-      HeaderRequestKey.deviceMachineName: appInfo.systemName,
-      HeaderRequestKey.deviceSystemVersion: appInfo.systemVersion,
-      HeaderRequestKey.minefocusApp: '${appInfo.systemName} ${appInfo.packageName} ${appInfo.version}'
+      'authKey1': 'Bearer $uuid',
+      'authKey2': '$num',
+      'authKey3': shaEncode(uuid + '$num' + 'hirojima')
     };
 
     /// 设置存储在keychain里的authorizationToken
-    final storage = MinefocusBase.getInstance().storage;
-    final authorizationToken = await storage.getFromKc(key: UserKey.authorizationToken);
-    if (authorizationToken != null) {
-      header[HeaderRequestKey.authorization] = 'Bearer ' + authorizationToken;
-    }
+//    final storage = MinefocusBase.getInstance().storage;
+//    final authorizationToken = await storage.getFromKc(key: UserKey.authorizationToken);
+//    if (authorizationToken != null) {
+//      header[HeaderRequestKey.authorization] = 'Bearer ' + authorizationToken;
+//    }
     return header;
   }
 
@@ -66,6 +74,23 @@ class MinefocusAPI<T> extends BaseRequest {
 
   /// 请求后数据处理,需要子类重写
   intercept(Response response, Result<T, RequestError> result) {}
+
+  int randomNum(int i) {
+    Random random= new Random.secure();
+    int a = random.nextInt(i);
+    return a;
+  }
+
+  String shaEncode(String st) {
+    var bytes = utf8.encode(st);
+    var digest = sha1.convert(bytes);
+    List<int> a =  digest.bytes;
+    String s = '';
+    s = hex(a).toLowerCase();
+
+
+    return '"$s"';
+  }
 }
 
 enum ErrorType {
@@ -94,12 +119,12 @@ class CallBackError {
         return config.serverError;
         break;
       case ErrorType.jwt:
-        final status = UserContext.getInstance().loginStatus;
-        if (status == LoginStatus.guest || status == LoginStatus.notCreated) {
-          return config.jwtGuestError;
-        } else {
-          return config.jwtLoginError;
-        }
+//        final status = UserContext.getInstance().loginStatus;
+//        if (status == LoginStatus.guest || status == LoginStatus.notCreated) {
+//          return config.jwtGuestError;
+//        } else {
+//          return config.jwtLoginError;
+//        }
         break;
       case ErrorType.unavailable:
         return config.unavailableError;

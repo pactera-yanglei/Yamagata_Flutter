@@ -26,7 +26,14 @@ dependencies:
   webview_flutter: ^0.3.15+1
   flutter_webview_plugin: ^0.3.0
   flutter_inappbrowser: ^1.1.1
-  dio: 3.0.7
+  dio: ^2.1.13
+    # json转model
+  dart_json_mapper:  ^1.1.11
+    # 获取设备信息
+  device_info: ^0.4.0+2
+    # 获取APP信息
+  package_info: ^0.4.0+6
+  crypto: 2.1.4
   url_launcher: ^5.2.3
   flustars: ^0.2.6+1
   sqflite: ^1.1.0
@@ -50,6 +57,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  fonts:
+    - family: Mainfonts
+      fonts:
+          - asset: fonts/HiraginoSansW3.ttc
 
   assets:
     - images/
@@ -84,6 +96,9 @@ flutter:
     - images/special_normal.png
     - images/special_selected.png
     - images/icon_new.png
+    - images/ic_up_arrow.png
+    - images/ic_down_arrow.png
+    - images/retern_blue_little.png
     - assets/icon/general_ps.png
     - assets/icon/passbook_income.png
     - assets/icon/passbook_outlay.png

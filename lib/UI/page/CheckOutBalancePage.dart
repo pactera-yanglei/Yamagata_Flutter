@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/AssetsPage/AssetsMainPage.dart';
 import 'package:yamagatabank_flutter/UI/PortalPage/PortalMainPage.dart';
+import 'package:yamagatabank_flutter/UI/page/Bousehold_Item.dart';
 import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
 import 'package:yamagatabank_flutter/UI/page/CashPage.dart';
 
@@ -22,30 +23,31 @@ class _CheckOutBalanceStateState extends State<CheckOutBalanceState> {
       child: DefaultTabController(
           length: 3,
           child: Scaffold(
-            appBar: AppBar(
-              title: TabBar(
-                tabs: <Widget>[
-                  Tab(text: "お気に入り"),
-                  Tab(text:"資産"),
-                  Tab(text: "ポイント"),
-                ],
-              ),
-            ),
+            appBar: PreferredSize(
+                child: AppBar(
+                  title: TabBar(
+                    tabs: <Widget>[
+                      Tab(text: "お気に入り"),
+                      Tab(text: "資産"),
+                      Tab(text: "ポイント"),
+                    ],
+                  ),
+                ),
+                preferredSize: Size.fromHeight(40)),
             body: TabBarView(
               children: <Widget>[
                 Container(
-                  child:new BookMakesState(),
+                  child: new BookMakesState(),
                 ),
                 Container(
-                  child:new AssetsMainPage(),
+                  child: new Bousehold_Item_Widget(),
                 ),
                 Container(
                   child:new PortalMain(),
                 )
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 
