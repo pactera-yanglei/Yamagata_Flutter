@@ -18,18 +18,24 @@ class CheckOutTabWidget extends StatelessWidget {
     ];
     //一个控件，可以监听返回键
     return new WillPopScope(
-      child: new TabBarWidget(
-        title: new Text("家計管理",textAlign: TextAlign.center,),
-        type: TabBarWidget.TOP_TAB,
-        tabItems: tabs,
-        tabViews: [
-          new CheckOutBalanceState(),
-          new BouseholdPage(),
-          new CashPage()
-        ],
-        backgroundColor: Theme.of(context).primaryColor,
-        indicatorColor: Theme.of(context).indicatorColor,
-      ),
+      child:
+          Container(
+//            height: MediaQuery.of(context).size.height*0.85,
+//            width: MediaQuery.of(context).size.width,
+            child:new TabBarWidget(
+//              indicatorColor:Colors.blue,
+              title: new Text("家計管理",textAlign: TextAlign.center,),
+              type: TabBarWidget.TOP_TAB,
+              tabItems: tabs,
+              tabViews: [
+                new CheckOutBalanceState(),
+                new BouseholdPage(),
+                new CashPage()
+              ],
+              backgroundColor: Theme.of(context).primaryColor,
+              indicatorColor: Theme.of(context).indicatorColor,
+            ),
+          )
     );
   }
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:yamagatabank_flutter/UI/DetailsPage/SeisonCardPage.dart';
