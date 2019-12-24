@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/AssetsPage/AssetsMainPage.dart';
+import 'package:yamagatabank_flutter/UI/PortalPage/PortalMainPage.dart';
 import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
 import 'package:yamagatabank_flutter/UI/page/CashPage.dart';
 
@@ -39,7 +40,7 @@ class _CheckOutBalanceStateState extends State<CheckOutBalanceState> {
                   child:new AssetsMainPage(),
                 ),
                 Container(
-                  child:new CashPage(),
+                  child:new PortalMain(),
                 )
               ],
             ),

@@ -11,6 +11,7 @@ class TabBarWidget extends StatefulWidget{
   final List<Widget> tabViews;
   final Color backgroundColor;
   final Color indicatorColor;
+  final int indicatorWeight;
   final Widget title;
   final Widget drawer;
   final Widget floatingActionButton;
@@ -23,6 +24,7 @@ class TabBarWidget extends StatefulWidget{
     this.tabViews,
     this.backgroundColor,
     this.indicatorColor,
+    this.indicatorWeight,
     this.title,
     this.drawer,
     this.floatingActionButton,
@@ -50,6 +52,7 @@ class _TabBarState extends State<TabBarWidget> with SingleTickerProviderStateMix
       this._tabViews,
       this._indicatorColor,
       this._title,
+
       this._drawer,
       this._onPageChanged
       ):super();
@@ -86,7 +89,7 @@ class _TabBarState extends State<TabBarWidget> with SingleTickerProviderStateMix
           actions: <Widget>[Icon(Icons.help_outline), Icon(Icons.settings)],
           title: _title,
           bottom: new TabBar(
-
+//            indicator: _indicator,
             tabs: widget.tabItems,
 
             controller: _tabController,
@@ -96,14 +99,18 @@ class _TabBarState extends State<TabBarWidget> with SingleTickerProviderStateMix
             },
           ),
         ),
-        body: new PageView(
-          controller: _pageController,
-          children: _tabViews,
-          onPageChanged: (index) {
-            _tabController.animateTo(index);
-            _onPageChanged?.call(index);
-          },
-        ),
+        body:
+            Container(
+              child:  new PageView(
+                controller: _pageController,
+                children: _tabViews,
+                onPageChanged: (index) {
+                  _tabController.animateTo(index);
+                  _onPageChanged?.call(index);
+                },
+              ),
+            )
+
       );
     }
     return new Scaffold(
