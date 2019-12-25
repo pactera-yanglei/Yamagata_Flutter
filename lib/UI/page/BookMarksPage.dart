@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:yamagatabank_flutter/UI/DetailsPage/SeisonCardPage.dart';
+import 'package:flutter/material.dart';
+
+//import 'package:yamagatabank_flutter/UI/DetailsPage/SeisonCardPage.dart';
 import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
-import 'package:yamagatabank_flutter/bean/kouzuoBean.dart';
+
+//import 'package:yamagatabank_flutter/bean/kouzuoBean.dart';
 import 'package:yamagatabank_flutter/res/colors.dart';
 import 'EditPage1.dart';
-import 'package:path/path.dart';
+//import 'package:path/path.dart';
 
 class BookMakesState extends StatefulWidget {
   @override
@@ -14,7 +17,7 @@ class BookMakesState extends StatefulWidget {
 
 class _BookMakesStateState extends State<BookMakesState> {
   List<UserInfo> YY1;
-  String _dbName = 'user.db6'; //数据库名称
+  String _dbName = 'user.db2'; //数据库名称
 //  List<KouzuoBean> list1 = new List();
 
   @override
@@ -24,7 +27,7 @@ class _BookMakesStateState extends State<BookMakesState> {
 
     YY1 = new List();
     _query(_dbName, sql);
-    for(int i=0;i<YY1.length;i++){
+    for (int i = 0; i < YY1.length; i++) {
       print(YY1[i]);
     }
 //    KouzuoBean bean = new KouzuoBean();
@@ -70,6 +73,17 @@ class _BookMakesStateState extends State<BookMakesState> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    var b = ModalRoute.of(context).isCurrent;
+    if (b) {
+      String sql = "SELECT * FROM student_table WHERE bool='true'";
+      YY1.clear();
+      _query(_dbName, sql);
+    }
+    super.deactivate();
   }
 
   @override
@@ -135,20 +149,21 @@ class _BookMakesStateState extends State<BookMakesState> {
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                          return EditWidget1();
-                                        }));
+                                      return EditWidget1();
+                                    }));
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 10),
-                                    child:Container(
+                                    child: Container(
                                       height: 30,
-                                      child:  Center(
-                                          child: Text(
-                                            "編集",
-                                            style: TextStyle(
-                                                fontSize: 12.0, color: Colors.blue),
-                                            textAlign: TextAlign.right,
-                                          ),
+                                      child: Center(
+                                        child: Text(
+                                          "編集",
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: Colors.blue),
+                                          textAlign: TextAlign.right,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -221,15 +236,17 @@ class _BookMakesStateState extends State<BookMakesState> {
   ///查全部
   _query(String dbName, String sql) async {
     var databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, dbName);
+    String path = databasesPath + '/' + dbName;
     Database db = await openDatabase(path);
     List<Map> list = await db.rawQuery(sql);
     for (int i = 0; i < list.length; i++) {
       UserInfo info = new UserInfo();
       info.Id = list[i]['id'];
       info.Title = list[i]['title'];
-      info.subTitle=list[i]['subtitle'];
-      info.money=list[i]['money'];
+      info.subTitle = list[i]['subtitle'];
+//      _formatNum('-449971');
+//      info.money=list[i]['money'];
+      info.money = _formatNum(list[i]['money']);
       if (list[i]['isselect'] == 'true') {
         info.isSelect = true;
       } else {
@@ -259,17 +276,18 @@ class booklistItemState extends State<booklistItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Expanded(child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          padding: EdgeInsets.only(left: 10.0, right: 10, top: 2),
-          reverse: false,
-          primary: true,
+      child: Expanded(
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              padding: EdgeInsets.only(left: 10.0, right: 10, top: 2),
+              reverse: false,
+              primary: true,
 //        itemExtent: 50.0,
-          shrinkWrap: true,
-          itemCount: widget.list.length,
-          cacheExtent: 30.0,
+              shrinkWrap: true,
+              itemCount: widget.list.length,
+              cacheExtent: 30.0,
 //        physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, i) => Container(
+              itemBuilder: (context, i) => Container(
 //        itemBuilder: (context,i)=>Container(
 //          width: MediaQuery.of(context).size.width-40,
 //          child: Padding(
@@ -370,79 +388,79 @@ class booklistItemState extends State<booklistItem> {
 //            ),
 //          ),
 //        )
-            child: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 5,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  widget.list[i].Title,
+                                  style: TextStyle(
+                                      fontFamily: 'Mainfonts',
+                                      fontSize: 15,
+                                      color: Colours.color_666666),
+                                ),
+                                Expanded(child: SizedBox())
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '￥',
+                                  style: TextStyle(
+                                      fontFamily: 'Mainfonts',
+                                      fontSize: 26,
+                                      color: Colours.color_666666),
+                                ),
+                                Expanded(child: SizedBox()),
+                                Text(
+                                  widget.list[i].money,
+                                  style: TextStyle(
+                                    fontFamily: 'Mainfonts',
+                                    fontSize: 30,
+                                    color: Colours.color_666666,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                  child: Container(),
+                                ),
+                                Image.asset(
+                                  "images/retern_blue_little.png",
+                                  width: 15,
+                                  height: 15,
+                                  fit: BoxFit.fill,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                  child: Container(),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              height: 1,
+                              color: Colours.text_gray_c,
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          widget.list[i].Title,
-                          style: TextStyle(
-                              fontFamily: 'Mainfonts',
-                              fontSize: 15,
-                              color: Colours.color_666666),
-                        ),
-                        Expanded(child: SizedBox())
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          '￥',
-                          style: TextStyle(
-                              fontFamily: 'Mainfonts',
-                              fontSize: 26,
-                              color: Colours.color_666666),
-                        ),
-                        Expanded(child: SizedBox()),
-                        Text(
-                         widget.list[i].money,
-                          style: TextStyle(
-                            fontFamily: 'Mainfonts',
-                            fontSize: 30,
-                            color: Colours.color_666666,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                          child: Container(),
-                        ),
-                        Image.asset(
-                          "images/retern_blue_little.png",
-                          width: 15,
-                          height: 15,
-                          fit: BoxFit.fill,
-                        ),
-                        SizedBox(
-                          width: 10,
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 1,
-                      color: Colours.text_gray_c,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ))),
+                  ))),
     );
   }
 
@@ -469,14 +487,36 @@ class booklistItemState extends State<booklistItem> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
-
 }
+
 //金额千分化
-_formatNum(String num){
-  if(num.length>3){
-   for(int i=0;i<num.length/3;i++){
-
-   }
+String _formatNum(String num) {
+  List<String> list = new List();
+  int a = 0;
+  if (num.length > 3) {
+    for (int i = 3; i < num.length; i = i + 3) {
+      if (i > num.length) {
+        break;
+      }
+      String s =
+          num.substring(num.length - ((a + 1) * 3), num.length - (a * 3));
+      list.add(s);
+      a++;
+    }
   }
-
+  String s = num.substring(0, num.length - (a * 3));
+  list.add(s);
+  String money = '';
+  for (int i = list.length - 1; i >= 0; i--) {
+    if (money.isEmpty) {
+      money = list[i];
+    } else {
+      if (money == '-') {
+        money = money + list[i];
+      } else {
+        money = money + ',' + list[i];
+      }
+    }
+  }
+  return money;
 }

@@ -29,7 +29,7 @@ class EditWidget1 extends StatefulWidget {
 class _EditWidgetState extends State<EditWidget1> {
   List<UserInfo> userMapList = new List(); //自定义数据
   List<UserInfo> list1 = []; //接数据定义的list
-  String _dbName = 'user.db6'; //数据库名称
+  String _dbName = 'user.db2'; //数据库名称
   int _dbVersion = 1; //数据库版本
   String _createTableSQL =
       'CREATE TABLE student_table (id INTEGER PRIMARY KEY,userid TEXT, title TEXT,subtitle TEXT,bool ISSELECT,money TEXT)'; //创建表;

@@ -7,6 +7,8 @@ import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
 import 'package:path/path.dart';
 import 'package:yamagatabank_flutter/bean/kouzuoBean.dart';
 import 'package:yamagatabank_flutter/res/colors.dart';
+import 'package:yamagatabank_flutter/routers/fluro_navigator.dart';
+import 'package:yamagatabank_flutter/routers/splash_routes.dart';
 
 class PortalMain extends StatefulWidget {
   @override
@@ -25,41 +27,53 @@ class _PortalMainState extends State<PortalMain> {
     _query(_dbName, sql);
 
     KouzuoBean bean = new KouzuoBean();
-    bean.current_balance = '1,000';
-    bean.display_name = '広島銀行';
+    bean.current_balance = '85,617';
+    bean.display_name = 'ANAマイル';
     bean.card_number = '3015900';
     bean.show_name = '普通';
     list1.add(bean);
     KouzuoBean bean1 = new KouzuoBean();
-    bean1.current_balance = '15,466';
-    bean1.display_name = '住信SBIネット銀行';
+    bean1.current_balance = '15,507';
+    bean1.display_name = '楽天スーパーポイント';
     bean1.card_number = '105-6605283';
     bean1.show_name = '代表口座';
     list1.add(bean1);
     KouzuoBean bean2 = new KouzuoBean();
-    bean2.current_balance = '35,427';
-    bean2.display_name = '三井住友銀行';
+    bean2.current_balance = '4,847';
+    bean2.display_name = 'Tポイント';
     bean2.card_number = '2126043';
     bean2.show_name = '残高別普通(総合)';
     list1.add(bean2);
     KouzuoBean bean3 = new KouzuoBean();
-    bean3.current_balance='-774,190';
-    bean3.display_name='JCBカード';
+    bean3.current_balance='4,846';
+    bean3.display_name='JALマイル';
     bean3.card_number='3015900';
     bean3.show_name='[OS]JCBカード/プラスAMC';
     list1.add(bean3);
     KouzuoBean bean4 = new KouzuoBean();
-    bean4.current_balance='-170,890';
-    bean4.display_name='ビューカード';
+    bean4.current_balance='2,406';
+    bean4.display_name='永久不滅ポイント';
     bean4.card_number='3015900';
     bean4.show_name='「ビュー・スイカ」カード';
     list1.add(bean4);
     KouzuoBean bean5 = new KouzuoBean();
-    bean5.current_balance='-17,198';
-    bean5.display_name='セゾンカード';
+    bean5.current_balance='2,151';
+    bean5.display_name='Amazonポイント';
     bean5.card_number='3015900';
     bean5.show_name='セゾンゴールド·アメリカン·工キ…';
     list1.add(bean5);
+    KouzuoBean bean6 = new KouzuoBean();
+    bean6.current_balance='0';
+    bean6.display_name='ビューサンクスポイント';
+    bean6.card_number='3015900';
+    bean6.show_name='セゾンゴールド·アメリカン·工キ…';
+    list1.add(bean6);
+    KouzuoBean bean7 = new KouzuoBean();
+    bean7.current_balance='0';
+    bean7.display_name='期間固定Tポイント';
+    bean7.card_number='3015900';
+    bean7.show_name='セゾンゴールド·アメリカン·工キ…';
+    list1.add(bean7);
 
     super.initState();
   }
@@ -220,7 +234,10 @@ class booklistItemState extends State<booklistItem> {
           itemCount: widget.list.length,
           cacheExtent: 30.0,
 //        physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, i) => Container(
+          itemBuilder: (context, i) =>GestureDetector(
+            onTap: (){NavigatorUtils.push(context, SplashRouter.seisionPage,
+                replace: false);},
+            child:  Container(
 //        itemBuilder: (context,i)=>Container(
 //          width: MediaQuery.of(context).size.width-40,
 //          child: Padding(
@@ -321,69 +338,70 @@ class booklistItemState extends State<booklistItem> {
 //            ),
 //          ),
 //        )
-            child: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          widget.list[i].display_name,
-                          style: TextStyle(
-                              fontFamily: 'Mainfonts',
-                              fontSize: 15,
-                              color: Colours.color_666666),
-                        ),
-                        Expanded(child: SizedBox())
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Image.asset('images/ic_p.png',fit: BoxFit.fill,),
-                        Expanded(child: SizedBox()),
-                        Text(
-                          widget.list[i].current_balance,
-                          style: TextStyle(
-                            fontFamily: 'Mainfonts',
-                            fontSize: 30,
-                            color: Colours.color_666666,
+              child: Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 5,
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                          child: Container(),
-                        ),
-                        Image.asset(
-                          "images/retern_blue_little.png",
-                          width: 15,
-                          height: 15,
-                          fit: BoxFit.fill,
-                        ),
-                        SizedBox(
-                          width: 10,
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 1,
-                      color: Colours.text_gray_c,
-                    )
-                  ],
+                          Text(
+                            widget.list[i].display_name,
+                            style: TextStyle(
+                                fontFamily: 'Mainfonts',
+                                fontSize: 15,
+                                color: Colours.color_666666),
+                          ),
+                          Expanded(child: SizedBox())
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Image.asset('images/ic_p.png',fit: BoxFit.fill,),
+                          Expanded(child: SizedBox()),
+                          Text(
+                            widget.list[i].current_balance,
+                            style: TextStyle(
+                              fontFamily: 'Mainfonts',
+                              fontSize: 30,
+                              color: Colours.color_666666,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                            child: Container(),
+                          ),
+                          Image.asset(
+                            "images/retern_blue_little.png",
+                            width: 15,
+                            height: 15,
+                            fit: BoxFit.fill,
+                          ),
+                          SizedBox(
+                            width: 10,
+                            child: Container(),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 1,
+                        color: Colours.text_gray_c,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

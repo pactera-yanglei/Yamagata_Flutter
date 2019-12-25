@@ -105,7 +105,7 @@ class MainTabWidgetState extends State<MainTabWidget> {
   @override
   void deactivate() {
     // TODO: implement deactivate
-//    var b = ModalRoute.of(context).isCurrent;
+    var b = ModalRoute.of(context).isCurrent;
 //    print(b);
 //    if(b){
 //      print('=====');

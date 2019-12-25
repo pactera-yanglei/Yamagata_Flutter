@@ -1,6 +1,7 @@
 
 import 'package:fluro/fluro.dart';
 import 'package:fluro/src/router.dart';
+import 'package:yamagatabank_flutter/UI/DetailsPage/SeisonCardPage.dart';
 import 'package:yamagatabank_flutter/UI/MainTabWidget.dart';
 import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
 import 'package:yamagatabank_flutter/UI/splash/rules_page.dart';
@@ -16,6 +17,7 @@ class SplashRouter implements IRouterProvider{
   static String welcomePage = "/welcome";
   static String mainPage = "/main";
   static String loginWebPage = "/loginweb";
+  static String seisionPage = "/seision";
   @override
   void initRouter(Router router) {
     // TODO: implement initRouter
@@ -24,6 +26,7 @@ class SplashRouter implements IRouterProvider{
     router.define(welcomePage, handler: Handler(handlerFunc: (_, params) => WelcomePage()));
     router.define(mainPage, handler: Handler(handlerFunc: (_, params) => MainTabWidget()));
     router.define(loginWebPage, handler: Handler(handlerFunc: (_, params) => LoginWeb()));
+    router.define(seisionPage, handler: Handler(handlerFunc: (_, params) => SeisionCardState()));
   }
 
 }
