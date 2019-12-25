@@ -10,13 +10,14 @@ import 'BookMarksPage.dart';
 class UserInfo {
   String Title;
   String subTitle;
+  String money;
   int Id;
   bool isSelect;
-  UserInfo({this.Title, this.subTitle,this.Id, this.isSelect = false});
+  UserInfo({this.Title, this.subTitle,this.money,this.Id, this.isSelect = false});
   @override
   String toString() {
     // TODO: implement toString
-    return Title + ','+subTitle+','+ '$Id' + ',' + '$isSelect';
+    return Title + ','+subTitle+','+money+','+ '$Id' + ',' + '$isSelect';
   }
 }
 
@@ -28,10 +29,10 @@ class EditWidget1 extends StatefulWidget {
 class _EditWidgetState extends State<EditWidget1> {
   List<UserInfo> userMapList = new List(); //自定义数据
   List<UserInfo> list1 = []; //接数据定义的list
-  String _dbName = 'user.db4'; //数据库名称
+  String _dbName = 'user.db6'; //数据库名称
   int _dbVersion = 1; //数据库版本
   String _createTableSQL =
-      'CREATE TABLE student_table (id INTEGER PRIMARY KEY,userid TEXT, title TEXT,subtitle TEXT,bool ISSELECT)'; //创建表;
+      'CREATE TABLE student_table (id INTEGER PRIMARY KEY,userid TEXT, title TEXT,subtitle TEXT,bool ISSELECT,money TEXT)'; //创建表;
   List<UserInfo> YY; //存在db的数据
   @override
   void initState() {
@@ -52,6 +53,7 @@ class _EditWidgetState extends State<EditWidget1> {
       u.Id=i;
       u.Title=listTitle[i];
       u.subTitle=listSubTitle[i];
+      u.money=listMoney[i];
       userMapList.add(u);
     }
   }
@@ -62,6 +64,7 @@ class _EditWidgetState extends State<EditWidget1> {
     '現金残高等','【OS】JCBカード/プラスAMC','セゾンゴールド・アメリカン・エギ···','「ビュー・スイカ」カード','普通3015900','投資信託','代表口座105-6605283','残高別普通(統合)2126043','預り金',
     '永久不滅ポイント','JALマイル','楽天スーパーポイント','ANAマイル','Tポイント','期間固定Tポイント','ビューサンクスポイント','Amazonポイント'
   ];
+  List listMoney=['1000','-14856','65562','46543','8461','-449971','6402','566','89496','-1966','84465','4894654','468984','-3500','7582','9878998','-46545'];
 //  addUser(){
 //    userMapList[0].Id=0;
 //    userMapList[0].Title='SBL証券';
@@ -148,13 +151,14 @@ class _EditWidgetState extends State<EditWidget1> {
                   for (int i = 0; i < list1.length; i++) {
 //                    print(list1[i].toString());
                     List listdb = list1[i].toString().split(',');
-                  print(listdb);
+//                  print(listdb);
                     String v1 = listdb[0];
                     String v2 = listdb[1];
                     String v3 = listdb[2];
                     String v4 = listdb[3];
+                    String v5 = listdb[4];
                     String sql =
-                        "INSERT INTO student_table(title,subtitle,userid,bool) VALUES('$v1','$v2','$v3','$v4')";
+                        "INSERT INTO student_table(title,subtitle,money,userid,bool) VALUES('$v1','$v2','$v3','$v4','$v5')";
                     _add(_dbName, sql);
                   }
                   SpUtil.putBool('Bl', false);
@@ -320,6 +324,7 @@ class _EditWidgetState extends State<EditWidget1> {
       info.Id = list[i]['id'];
       info.Title = list[i]['title'];
       info.subTitle=list[i]['subtitle'];
+      info.money=list[i]['money'];
       if (list[i]['bool'] == 'true') {
         info.isSelect = true;
       } else {

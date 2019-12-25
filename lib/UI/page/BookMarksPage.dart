@@ -14,51 +14,55 @@ class BookMakesState extends StatefulWidget {
 
 class _BookMakesStateState extends State<BookMakesState> {
   List<UserInfo> YY1;
-  String _dbName = 'user.db1'; //数据库名称
-  List<KouzuoBean> list1 = new List();
+  String _dbName = 'user.db6'; //数据库名称
+//  List<KouzuoBean> list1 = new List();
 
   @override
   void initState() {
     // TODO: implement initState
     String sql = "SELECT * FROM student_table WHERE bool='true'";
+
     YY1 = new List();
     _query(_dbName, sql);
-    KouzuoBean bean = new KouzuoBean();
-    bean.current_balance = '1,000';
-    bean.display_name = '広島銀行';
-    bean.card_number = '3015900';
-    bean.show_name = '普通';
-    list1.add(bean);
-    KouzuoBean bean1 = new KouzuoBean();
-    bean1.current_balance = '15,466';
-    bean1.display_name = '住信SBIネット銀行';
-    bean1.card_number = '105-6605283';
-    bean1.show_name = '代表口座';
-    list1.add(bean1);
-    KouzuoBean bean2 = new KouzuoBean();
-    bean2.current_balance = '35,427';
-    bean2.display_name = '三井住友銀行';
-    bean2.card_number = '2126043';
-    bean2.show_name = '残高別普通(総合)';
-    list1.add(bean2);
-    KouzuoBean bean3 = new KouzuoBean();
-    bean3.current_balance='-774,190';
-    bean3.display_name='JCBカード';
-    bean3.card_number='3015900';
-    bean3.show_name='[OS]JCBカード/プラスAMC';
-    list1.add(bean3);
-    KouzuoBean bean4 = new KouzuoBean();
-    bean4.current_balance='-170,890';
-    bean4.display_name='ビューカード';
-    bean4.card_number='3015900';
-    bean4.show_name='「ビュー・スイカ」カード';
-    list1.add(bean4);
-    KouzuoBean bean5 = new KouzuoBean();
-    bean5.current_balance='-17,198';
-    bean5.display_name='セゾンカード';
-    bean5.card_number='3015900';
-    bean5.show_name='セゾンゴールド·アメリカン·工キ…';
-    list1.add(bean5);
+    for(int i=0;i<YY1.length;i++){
+      print(YY1[i]);
+    }
+//    KouzuoBean bean = new KouzuoBean();
+//    bean.current_balance = '1,000';
+//    bean.display_name = '広島銀行';
+//    bean.card_number = '3015900';
+//    bean.show_name = '普通';
+//    list1.add(bean);
+//    KouzuoBean bean1 = new KouzuoBean();
+//    bean1.current_balance = '15,466';
+//    bean1.display_name = '住信SBIネット銀行';
+//    bean1.card_number = '105-6605283';
+//    bean1.show_name = '代表口座';
+//    list1.add(bean1);
+//    KouzuoBean bean2 = new KouzuoBean();
+//    bean2.current_balance = '35,427';
+//    bean2.display_name = '三井住友銀行';
+//    bean2.card_number = '2126043';
+//    bean2.show_name = '残高別普通(総合)';
+//    list1.add(bean2);
+//    KouzuoBean bean3 = new KouzuoBean();
+//    bean3.current_balance='-774,190';
+//    bean3.display_name='JCBカード';
+//    bean3.card_number='3015900';
+//    bean3.show_name='[OS]JCBカード/プラスAMC';
+//    list1.add(bean3);
+//    KouzuoBean bean4 = new KouzuoBean();
+//    bean4.current_balance='-170,890';
+//    bean4.display_name='ビューカード';
+//    bean4.card_number='3015900';
+//    bean4.show_name='「ビュー・スイカ」カード';
+//    list1.add(bean4);
+//    KouzuoBean bean5 = new KouzuoBean();
+//    bean5.current_balance='-17,198';
+//    bean5.display_name='セゾンカード';
+//    bean5.card_number='3015900';
+//    bean5.show_name='セゾンゴールド·アメリカン·工キ…';
+//    list1.add(bean5);
     super.initState();
   }
 
@@ -155,7 +159,7 @@ class _BookMakesStateState extends State<BookMakesState> {
                         ),
                       ),
                       Divider(height: 1.0, indent: 0.0, color: Colors.black12),
-                      booklistItem(list1)
+                      booklistItem(YY1)
                     ],
                   ),
                 ),
@@ -223,6 +227,9 @@ class _BookMakesStateState extends State<BookMakesState> {
     for (int i = 0; i < list.length; i++) {
       UserInfo info = new UserInfo();
       info.Id = list[i]['id'];
+      info.Title = list[i]['title'];
+      info.subTitle=list[i]['subtitle'];
+      info.money=list[i]['money'];
       if (list[i]['isselect'] == 'true') {
         info.isSelect = true;
       } else {
@@ -240,7 +247,7 @@ class _BookMakesStateState extends State<BookMakesState> {
 }
 
 class booklistItem extends StatefulWidget {
-  List<KouzuoBean> list = new List();
+  List<UserInfo> list = new List();
 
   booklistItem(this.list);
 
@@ -381,7 +388,7 @@ class booklistItemState extends State<booklistItem> {
                           width: 5,
                         ),
                         Text(
-                          widget.list[i].display_name,
+                          widget.list[i].Title,
                           style: TextStyle(
                               fontFamily: 'Mainfonts',
                               fontSize: 15,
@@ -404,7 +411,7 @@ class booklistItemState extends State<booklistItem> {
                         ),
                         Expanded(child: SizedBox()),
                         Text(
-                          widget.list[i].current_balance,
+                         widget.list[i].money,
                           style: TextStyle(
                             fontFamily: 'Mainfonts',
                             fontSize: 30,
@@ -462,4 +469,14 @@ class booklistItemState extends State<booklistItem> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
+
+}
+//金额千分化
+_formatNum(String num){
+  if(num.length>3){
+   for(int i=0;i<num.length/3;i++){
+
+   }
+  }
+
 }
