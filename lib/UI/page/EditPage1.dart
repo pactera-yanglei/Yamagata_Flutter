@@ -8,14 +8,15 @@ import 'BookMarksPage.dart';
 
 //UserInfo
 class UserInfo {
-  String Name;
+  String Title;
+  String subTitle;
   int Id;
   bool isSelect;
-  UserInfo({this.Name, this.Id, this.isSelect = false});
+  UserInfo({this.Title, this.subTitle,this.Id, this.isSelect = false});
   @override
   String toString() {
     // TODO: implement toString
-    return Name + ',' + '$Id' + ',' + '$isSelect';
+    return Title + ','+subTitle+','+ '$Id' + ',' + '$isSelect';
   }
 }
 
@@ -27,17 +28,17 @@ class EditWidget1 extends StatefulWidget {
 class _EditWidgetState extends State<EditWidget1> {
   List<UserInfo> userMapList = new List(); //自定义数据
   List<UserInfo> list1 = []; //接数据定义的list
-  String _dbName = 'user.db1'; //数据库名称
+  String _dbName = 'user.db4'; //数据库名称
   int _dbVersion = 1; //数据库版本
   String _createTableSQL =
-      'CREATE TABLE student_table (id INTEGER PRIMARY KEY, name TEXT,age INTEGER,bool ISSELECT)'; //创建表;
+      'CREATE TABLE student_table (id INTEGER PRIMARY KEY,userid TEXT, title TEXT,subtitle TEXT,bool ISSELECT)'; //创建表;
   List<UserInfo> YY; //存在db的数据
-
   @override
   void initState() {
     // TODO: implement initState
     addUser();
-
+    //创建数据库，表
+    _createDb(_dbName, _dbVersion, _createTableSQL);
     String sql = "SELECT * FROM student_table";
     YY = new List();
     _query(_dbName, sql);
@@ -46,13 +47,74 @@ class _EditWidgetState extends State<EditWidget1> {
   }
 
   addUser() {
-    for (int i = 0; i <= 8; i++) {
+    for (int i = 0; i < listTitle.length; i++) {
       UserInfo u = new UserInfo();
-      u.Name = "A$i";
-      u.Id = i;
+      u.Id=i;
+      u.Title=listTitle[i];
+      u.subTitle=listSubTitle[i];
       userMapList.add(u);
     }
   }
+  List listTitle=[
+    'SBL証券','JCBカード','セゾンカード','ビューカード','店島銀行','楽天証券','セゾンカード','JALマイレージバンク','楽天スーパーポイント','ANAマイレージクララ','Tポイントカード','Tポイントカード','ビューガード','Amazonポイント'
+  ];
+  List listSubTitle=[
+    '現金残高等','【OS】JCBカード/プラスAMC','セゾンゴールド・アメリカン・エギ···','「ビュー・スイカ」カード','普通3015900','投資信託','代表口座105-6605283','残高別普通(統合)2126043','預り金',
+    '永久不滅ポイント','JALマイル','楽天スーパーポイント','ANAマイル','Tポイント','期間固定Tポイント','ビューサンクスポイント','Amazonポイント'
+  ];
+//  addUser(){
+//    userMapList[0].Id=0;
+//    userMapList[0].Title='SBL証券';
+//    userMapList[0].subTitle='現金残高等';
+//    userMapList[1].Id=1;
+//    userMapList[1].Title='JCBカード';
+//    userMapList[1].subTitle='【OS】JCBカード/プラスAMC';
+//    userMapList[2].Id=2;
+//    userMapList[2].Title='セゾンカード';
+//    userMapList[2].subTitle='セゾンゴールド・アメリカン・エギ···';
+//    userMapList[3].Id=3;
+//    userMapList[3].Title='ビューカード';
+//    userMapList[3].subTitle='「ビュー・スイカ」カード';
+//    userMapList[4].Id=4;
+//    userMapList[4].Title='店島銀行';
+//    userMapList[4].subTitle='普通3015900';
+//    userMapList[5].Id=5;
+//    userMapList[5].Title='楽天証券';
+//    userMapList[5].subTitle='投資信託';
+//    userMapList[6].Id=6;
+//    userMapList[6].Title='住信SBLネット銀行';
+//    userMapList[6].subTitle='代表口座105-6605283';
+//    userMapList[7].Id=7;
+//    userMapList[7].Title='三井住友銀行';
+//    userMapList[7].subTitle='残高別普通(統合)2126043';
+//    userMapList[8].Id=8;
+//    userMapList[8].Title='楽天証券';
+//    userMapList[8].subTitle='預り金';
+//    userMapList[9].Id=9;
+//    userMapList[9].Title='セゾンカード';
+//    userMapList[9].subTitle='永久不滅ポイント';
+//    userMapList[10].Id=10;
+//    userMapList[10].Title='JALマイレージバンク';
+//    userMapList[10].subTitle='JALマイル';
+//    userMapList[11].Id=11;
+//    userMapList[11].Title='楽天スーパーポイント';
+//    userMapList[11].subTitle='楽天スーパーポイント';
+//    userMapList[12].Id=12;
+//    userMapList[12].Title='ANAマイレージクララ';
+//    userMapList[12].subTitle='ANAマイル';
+//    userMapList[13].Id=13;
+//    userMapList[13].Title='Tポイントカード';
+//    userMapList[13].subTitle='Tポイント';
+//    userMapList[14].Id=14;
+//    userMapList[14].Title='Tポイントカード';
+//    userMapList[14].subTitle='期間固定Tポイント';
+//    userMapList[15].Id=15;
+//    userMapList[15].Title='ビューガード';
+//    userMapList[15].subTitle='ビューサンクスポイント';
+//    userMapList[16].Id=16;
+//    userMapList[16].Title='Amazonポイント';
+//    userMapList[16].subTitle='Amazonポイント';
+//  }
 
   @override
   void dispose() {
@@ -62,6 +124,7 @@ class _EditWidgetState extends State<EditWidget1> {
 
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     //判断db是否有数据
     bool bl = SpUtil.getBool('Bl');
@@ -85,12 +148,13 @@ class _EditWidgetState extends State<EditWidget1> {
                   for (int i = 0; i < list1.length; i++) {
 //                    print(list1[i].toString());
                     List listdb = list1[i].toString().split(',');
-//                  print(listdb);
+                  print(listdb);
                     String v1 = listdb[0];
                     String v2 = listdb[1];
                     String v3 = listdb[2];
+                    String v4 = listdb[3];
                     String sql =
-                        "INSERT INTO student_table(name,age,bool) VALUES('$v1','$v2','$v3')";
+                        "INSERT INTO student_table(title,subtitle,userid,bool) VALUES('$v1','$v2','$v3','$v4')";
                     _add(_dbName, sql);
                   }
                   SpUtil.putBool('Bl', false);
@@ -128,10 +192,8 @@ class _EditWidgetState extends State<EditWidget1> {
 //                      ),
 //                    ),
                         value: UserInfo.isSelect,
-                        title: Text(UserInfo.Name),
-                        subtitle: Row(
-                          children: <Widget>[Icon(Icons.perm_contact_calendar)],
-                        ),
+                        title: Text(UserInfo.Title),
+                        subtitle: Text(UserInfo.subTitle),
 //                        activeColor: Colors.blue,
                         dense: true,
                         selected: true,
@@ -170,7 +232,6 @@ class _EditWidgetState extends State<EditWidget1> {
       ),
     );
   }
-
   ///创建数据库db
   _createDb(String dbName, int vers, String dbTables) async {
     //获取数据库路径
@@ -180,14 +241,32 @@ class _EditWidgetState extends State<EditWidget1> {
     //打开数据库
     await openDatabase(path, version: vers,
         onUpgrade: (Database db, int oldVersion, int newVersion) async {
-      //数据库升级,只回调一次
+          //数据库升级,只回调一次
 //      print("数据库需要升级！旧版：$oldVersion,新版：$newVersion");
-    }, onCreate: (Database db, int vers) async {
-      //创建表，只回调一次
-      await db.execute(dbTables);
-      await db.close();
-    });
+        }, onCreate: (Database db, int vers) async {
+          //创建表，只回调一次
+          await db.execute(dbTables);
+          await db.close();
+        });
+    print("创建数据库成功");
   }
+//  ///创建数据库db
+//  _createDb(String dbName, int vers, String dbTables) async {
+//    //获取数据库路径
+//    var databasesPath = await getDatabasesPath();
+//    String path = join(databasesPath, dbName);
+////    print("数据库路径：$path数据库版本$vers");
+//    //打开数据库
+//    await openDatabase(path, version: vers,
+//        onUpgrade: (Database db, int oldVersion, int newVersion) async {
+//      //数据库升级,只回调一次
+////      print("数据库需要升级！旧版：$oldVersion,新版：$newVersion");
+//    }, onCreate: (Database db, int vers) async {
+//      //创建表，只回调一次
+//      await db.execute(dbTables);
+//      await db.close();
+//    });
+//  }
 
   ///增
   _add(String dbName, String sql) async {
@@ -239,7 +318,8 @@ class _EditWidgetState extends State<EditWidget1> {
     for (int i = 0; i < list.length; i++) {
       UserInfo info = new UserInfo();
       info.Id = list[i]['id'];
-      info.Name = list[i]['name'];
+      info.Title = list[i]['title'];
+      info.subTitle=list[i]['subtitle'];
       if (list[i]['bool'] == 'true') {
         info.isSelect = true;
       } else {
@@ -248,11 +328,7 @@ class _EditWidgetState extends State<EditWidget1> {
       YY.add(info);
     }
     setState(() {});
-//    for (int i = 0; i < YY.length; i++) {
-//      print(YY[i]);
-//    }
+
     await db.close();
-//    YY.addAll(list);
-//    return list;
   }
 }

@@ -12,7 +12,7 @@ class BookMakesState extends StatefulWidget {
 
 class _BookMakesStateState extends State<BookMakesState> {
   List<UserInfo> YY1;
-  String _dbName = 'user.db1'; //数据库名称
+  String _dbName = 'user.db4'; //数据库名称
 
   @override
   void initState() {
@@ -83,8 +83,8 @@ class _BookMakesStateState extends State<BookMakesState> {
                       .map(
                         (UserInfo) => ListTile(
                           leading: Icon(Icons.attach_money),
-                          title: Text(UserInfo.Name),
-                          subtitle: Text(UserInfo.Name),
+                          title: Text(UserInfo.Title),
+                          subtitle: Text(UserInfo.subTitle),
                             trailing:Icon(Icons.navigate_next),
                           onTap: () {
                             Navigator.push(context,
@@ -162,8 +162,10 @@ class _BookMakesStateState extends State<BookMakesState> {
     List<Map> list = await db.rawQuery(sql);
     for (int i = 0; i < list.length; i++) {
       UserInfo info = new UserInfo();
+//      (id INTEGER PRIMARY KEY,userid TEXT, title TEXT,subtitle TEXT,bool ISSELECT)';
+      info.Title=list[i]['title'];
       info.Id = list[i]['id'];
-      info.Name = list[i]['name'];
+      info.subTitle = list[i]['subtitle'];
       if (list[i]['isselect'] == 'true') {
         info.isSelect = true;
       } else {

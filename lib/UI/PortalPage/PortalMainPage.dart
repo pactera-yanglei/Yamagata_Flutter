@@ -52,8 +52,8 @@ class _PortalMainState extends State<PortalMain> {
                       .map(
                         (UserInfo) => ListTile(
                       leading: Icon(Icons.attach_money),
-                      title: Text(UserInfo.Name),
-                      subtitle: Text(UserInfo.Name),
+                      title: Text(UserInfo.Title),
+                      subtitle: Text(UserInfo.subTitle),
                       trailing:Icon(Icons.navigate_next),
                       onTap: () {
                         Navigator.push(context,
@@ -132,7 +132,7 @@ class _PortalMainState extends State<PortalMain> {
     for (int i = 0; i < list.length; i++) {
       UserInfo info = new UserInfo();
       info.Id = list[i]['id'];
-      info.Name = list[i]['name'];
+      info.Title = list[i]['name'];
       if (list[i]['isselect'] == 'true') {
         info.isSelect = true;
       } else {
