@@ -151,7 +151,7 @@ class MainTabWidgetState extends State<MainTabWidget> {
   }
 
   String timeget() {
-    String time = DateUtil.getDateStrByDateTime(DateTime.now(),format: DateFormat.NORMAL);
+    String time = DateUtil.getDateStrByDateTime(DateTime.now(),format: DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE);
     List<String> ymd = time.split(' ')[0].split('-');
     List<String> hmm = time.split(' ')[1].split(':');
 //    return ymd[0]+ymd[1]+ymd[2]+hmm[0]+hmm[1]+hmm[2];

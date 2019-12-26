@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:yamagatabank_flutter/UI/page/CheckOutBalancePage.dart';
 import 'package:yamagatabank_flutter/UI/page/HouseholdPage.dart';
@@ -20,7 +21,10 @@ class CheckOutTabWidget1 extends StatelessWidget {
     //一个控件，可以监听返回键
     return new WillPopScope(
       child: new TabBarWidget(
-        title: new Text("家計管理",textAlign: TextAlign.center,),
+        title: new Text(
+          "家計管理",
+          textAlign: TextAlign.center,
+        ),
         type: TabBarWidget.TOP_TAB,
         tabItems: tabs,
         tabViews: [
@@ -82,111 +86,164 @@ class CheckOutTabWidgetState extends State<CheckOutTabWidget> {
         color: Colors.white,
         child: Column(
           children: <Widget>[
+            SizedBox(
+              height: 3,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(child: Container()),
+                Image.asset('images/ic_clock.png',width: 15,height: 15,fit: BoxFit.fill,),
+                SizedBox(
+                  width: 3,
+                ),
+                Text(getTime()),
+                SizedBox(
+                  width: 3,
+                ),
+                Container(
+                  width: 60,
+                  height: 25,
+                  decoration: BoxDecoration(
+                      color: Colours.app_main,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        getTime();
+                      });
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(child: Container()),
+                        Icon(Icons.refresh,color: Colors.white,size: 20,),
+                        Text(' 更 新 ',style: TextStyle(fontSize: 12,color: Colors.white),),
+                        Expanded(child: Container()),
+                      ],
+                    ),
+                  ),
+                ),
+//                Image.asset('images/ic_refresh_light.png')
+                SizedBox(
+                  width: 15,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 3,
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 40,
               child: Row(
                 children: <Widget>[
                   Expanded(
-                      child:GestureDetector(
-                        onTap: (){
-                          tapnum=0;
-                          _pageController.jumpToPage(0);
+                      child: GestureDetector(
+                    onTap: () {
+                      tapnum = 0;
+                      _pageController.jumpToPage(0);
 //                          _pageController.animateToPage(0, duration: Duration(milliseconds: 1000), curve: Curves.ease);
-                          setState(() {
-                            _currentPage=0;
-
-                          });
-                        },
-                        child:  Container(
-                          height: 40,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 15, right: 15),
-                            child: Container(
-                              decoration: _currentPage == 0
-                                  ? BoxDecoration(
+                      setState(() {
+                        _currentPage = 0;
+                      });
+                    },
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width - 90) / 3,
+                      height: 40,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 15, right: 15),
+                        child: Container(
+                          decoration: _currentPage == 0
+                              ? BoxDecoration(
                                   color: Colours.app_main,
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)))
-                                  : null,
-                              child: Center(
-                                child: Text("残高",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize:15,color: _currentPage==0?Colors.white:Colours.app_main)),
-                              ),
-                            ),
+                              : null,
+                          child: Center(
+                            child: Text("残高",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: _currentPage == 0
+                                        ? Colors.white
+                                        : Colours.app_main)),
                           ),
                         ),
-                      )
-                  ),
+                      ),
+                    ),
+                  )),
                   Expanded(
                       child: GestureDetector(
-                        onTap: (){
-                          tapnum=1;
+                    onTap: () {
+                      tapnum = 1;
 //                          _pageController.animateToPage(1, duration: Duration(milliseconds: 1000), curve: Curves.ease);
-                          _pageController.jumpToPage(1);
-                          setState(() {
-                            _currentPage=1;
-
-                          });
-                        },
+                      _pageController.jumpToPage(1);
+                      setState(() {
+                        _currentPage = 1;
+                      });
+                    },
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width - 90) / 3,
+                      height: 40,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 15, right: 15),
                         child: Container(
-                          height: 40,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 15, right: 15),
-                            child: Container(
-                              decoration: _currentPage == 1
-                                  ? BoxDecoration(
+                          decoration: _currentPage == 1
+                              ? BoxDecoration(
                                   color: Colours.app_main,
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)))
-                                  : null,
-                              child: Center(
-                                child: Text("家計簙",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize:15,color: _currentPage==1?Colors.white:Colours.app_main)),
-                              ),
-                            ),
+                              : null,
+                          child: Center(
+                            child: Text("家計簙",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: _currentPage == 1
+                                        ? Colors.white
+                                        : Colours.app_main)),
                           ),
                         ),
-                      )
-                  ),
+                      ),
+                    ),
+                  )),
                   Expanded(
                       child: GestureDetector(
-                        onTap: (){
-                          tapnum=2;
-                          _pageController.jumpToPage(2);
+                    onTap: () {
+                      tapnum = 2;
+                      _pageController.jumpToPage(2);
 //                          _pageController.animateToPage(2, duration: Duration(milliseconds: 1000), curve: Curves.ease);
-                          setState(() {
-                            _currentPage = 2;
-
-                          });
-                        },
+                      setState(() {
+                        _currentPage = 2;
+                      });
+                    },
+                    child: Container(
+                      width: (MediaQuery.of(context).size.width - 90) / 3,
+                      height: 40,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 15, right: 15),
                         child: Container(
-                          height: 40,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 15, right: 15),
-                            child: Container(
-                              decoration: _currentPage == 2
-                                  ? BoxDecoration(
+                          decoration: _currentPage == 2
+                              ? BoxDecoration(
                                   color: Colours.app_main,
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)))
-                                  : null,
-                              child: Center(
-                                child: Text("貯金箱",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15, color:_currentPage==2?Colors.white:Colours.app_main)),
-                              ),
-                            ),
+                              : null,
+                          child: Center(
+                            child: Text("貯金箱",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: _currentPage == 2
+                                        ? Colors.white
+                                        : Colours.app_main)),
                           ),
                         ),
-                      )
-                  ),
+                      ),
+                    ),
+                  )),
                 ],
               ),
             ),
@@ -222,5 +279,20 @@ class CheckOutTabWidgetState extends State<CheckOutTabWidget> {
       },
     );
   }
-}
 
+  String getTime() {
+    String t = DateUtil.getDateStrByDateTime(DateTime.now(),
+        format: DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE);
+    List<String> list = t.split('-');
+    String time = '';
+    for (int i = 0; i < list.length; i++) {
+      if (i != list.length - 1) {
+        time = time + list[i] + '.';
+      } else {
+        time = time + list[i];
+      }
+    }
+
+    return time;
+  }
+}

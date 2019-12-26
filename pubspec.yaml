@@ -103,3 +103,5 @@ flutter:
     - assets/icon/passbook_income.png
     - assets/icon/passbook_outlay.png
     - images/ic_p.png
+    - images/ic_clock.png
+    - images/ic_refresh_light.png

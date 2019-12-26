@@ -21,7 +21,7 @@ class WelcomePageState extends State<WelcomePage> {
 
         child: Container(
           padding:  EdgeInsets.only(left: 10.0,top: 0.0, right: 10.0, bottom: 0.0),
-          child: new Image.asset("images/splash.gif",width: width - 20.0 , height: width - 20.0, key: Key('start_animation'),),
+          child: new Image.asset("images/splash.gif",width: 350 , height: 130,fit:BoxFit.fill,key: Key('start_animation'),),
         ),
       ),
     );

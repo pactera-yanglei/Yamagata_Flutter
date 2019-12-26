@@ -7,6 +7,8 @@ import 'package:yamagatabank_flutter/UI/portal/LoginWebView.dart';
 
 //import 'package:yamagatabank_flutter/bean/kouzuoBean.dart';
 import 'package:yamagatabank_flutter/res/colors.dart';
+import 'package:yamagatabank_flutter/routers/fluro_navigator.dart';
+import 'package:yamagatabank_flutter/routers/splash_routes.dart';
 import 'EditPage1.dart';
 //import 'package:path/path.dart';
 
@@ -287,7 +289,10 @@ class booklistItemState extends State<booklistItem> {
               itemCount: widget.list.length,
               cacheExtent: 30.0,
 //        physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, i) => Container(
+              itemBuilder: (context, i) => GestureDetector(
+                onTap: (){NavigatorUtils.push(context, SplashRouter.seisionPage,
+                    replace: false);},
+                child: Container(
 //        itemBuilder: (context,i)=>Container(
 //          width: MediaQuery.of(context).size.width-40,
 //          child: Padding(
@@ -388,79 +393,80 @@ class booklistItemState extends State<booklistItem> {
 //            ),
 //          ),
 //        )
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  widget.list[i].Title,
-                                  style: TextStyle(
-                                      fontFamily: 'Mainfonts',
-                                      fontSize: 15,
-                                      color: Colours.color_666666),
-                                ),
-                                Expanded(child: SizedBox())
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  '￥',
-                                  style: TextStyle(
-                                      fontFamily: 'Mainfonts',
-                                      fontSize: 26,
-                                      color: Colours.color_666666),
-                                ),
-                                Expanded(child: SizedBox()),
-                                Text(
-                                  widget.list[i].money,
-                                  style: TextStyle(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                widget.list[i].Title,
+                                style: TextStyle(
                                     fontFamily: 'Mainfonts',
-                                    fontSize: 30,
-                                    color: Colours.color_666666,
-                                  ),
+                                    fontSize: 15,
+                                    color: Colours.color_666666),
+                              ),
+                              Expanded(child: SizedBox())
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                '￥',
+                                style: TextStyle(
+                                    fontFamily: 'Mainfonts',
+                                    fontSize: 26,
+                                    color: Colours.color_666666),
+                              ),
+                              Expanded(child: SizedBox()),
+                              Text(
+                                widget.list[i].money,
+                                style: TextStyle(
+                                  fontFamily: 'Mainfonts',
+                                  fontSize: 30,
+                                  color: Colours.color_666666,
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                  child: Container(),
-                                ),
-                                Image.asset(
-                                  "images/retern_blue_little.png",
-                                  width: 15,
-                                  height: 15,
-                                  fit: BoxFit.fill,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                  child: Container(),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              height: 1,
-                              color: Colours.text_gray_c,
-                            )
-                          ],
-                        ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                                child: Container(),
+                              ),
+                              Image.asset(
+                                "images/retern_blue_little.png",
+                                width: 15,
+                                height: 15,
+                                fit: BoxFit.fill,
+                              ),
+                              SizedBox(
+                                width: 10,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 1,
+                            color: Colours.text_gray_c,
+                          )
+                        ],
                       ),
                     ),
-                  ))),
+                  ),
+                ),
+              ))),
     );
   }
 
